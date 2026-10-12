@@ -5561,16 +5561,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-10-07T05:30:00Z",
-          "value": 0.005809
-        },
-        {
-          "timestamp": "2026-10-07T05:45:00Z",
-          "value": 0.005321
-        },
-        {
           "timestamp": "2026-10-07T06:00:00Z",
-          "value": 0.002377
+          "value": 0.002275
         },
         {
           "timestamp": "2026-10-07T06:15:00Z",
@@ -7482,7 +7474,15 @@
         },
         {
           "timestamp": "2026-10-12T05:30:00Z",
-          "value": 0.00417
+          "value": 0.004163
+        },
+        {
+          "timestamp": "2026-10-12T05:45:00Z",
+          "value": 0.001694
+        },
+        {
+          "timestamp": "2026-10-12T06:00:00Z",
+          "value": 0.001105
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -7555,7 +7555,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-10-12T06:03:58.106919Z"
+    "updated_at": "2026-10-12T06:18:56.085079Z"
   },
   "panels": {
     "depth": {
@@ -7569,16 +7569,8 @@
       "minimum_axis_max": 0.173,
       "points": [
         {
-          "timestamp": "2026-10-07T05:30:00Z",
-          "value": 0.08
-        },
-        {
-          "timestamp": "2026-10-07T05:45:00Z",
-          "value": 0.077
-        },
-        {
           "timestamp": "2026-10-07T06:00:00Z",
-          "value": 0.057
+          "value": 0.056
         },
         {
           "timestamp": "2026-10-07T06:15:00Z",
@@ -9491,6 +9483,14 @@
         {
           "timestamp": "2026-10-12T05:30:00Z",
           "value": 0.071
+        },
+        {
+          "timestamp": "2026-10-12T05:45:00Z",
+          "value": 0.05
+        },
+        {
+          "timestamp": "2026-10-12T06:00:00Z",
+          "value": 0.042
         }
       ],
       "title": "Observed Water Depth",
@@ -9505,16 +9505,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-10-12T05:30:00Z",
+      "last_updated": "2026-10-12T06:00:00Z",
       "points": [
-        {
-          "timestamp": "2026-10-07T05:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-10-07T06:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-10-07T06:15:00Z",
           "value": 0.0
@@ -11422,6 +11414,14 @@
         {
           "timestamp": "2026-10-12T05:30:00Z",
           "value": 0.2
+        },
+        {
+          "timestamp": "2026-10-12T05:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-12T06:00:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -11432,17 +11432,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-10-12T05:43:00Z",
-    "start_timestamp": "2026-10-11T05:44:00Z"
+    "end_timestamp": "2026-10-12T06:13:00Z",
+    "start_timestamp": "2026-10-11T06:14:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-10-12T05:43:00Z",
-      "start_timestamp": "2026-10-11T05:44:00Z"
+      "end_timestamp": "2026-10-12T06:13:00Z",
+      "start_timestamp": "2026-10-11T06:14:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-10-12T05:43:00Z",
-      "start_timestamp": "2026-10-07T05:44:00Z"
+      "end_timestamp": "2026-10-12T06:13:00Z",
+      "start_timestamp": "2026-10-07T06:14:00Z"
     }
   },
   "site": {
@@ -11458,7 +11458,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-12T06:03:58.427560Z",
+    "published_at": "2026-10-12T06:18:56.414889Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -11467,7 +11467,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.069
+      "value": 0.04
     },
     {
       "decimals": 3,
