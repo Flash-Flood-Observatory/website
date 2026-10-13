@@ -2,3 +2,8 @@ node_modules/
 .cache/
 public/assets/audio/*.mp3
 __pycache__/
+
+# Local credentials stay outside version control.
+.env
+.env.*
+!.env.example
