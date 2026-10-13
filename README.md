@@ -346,3 +346,9 @@ Ten speakers include official flood status and the exact requested partner names
 The flood illustration is an authored vector symbol keyed to the official payload state, based on the supplied visual reference. Unknown/unavailable and warning-no-longer-in-force states use a neutral information symbol rather than a green no-warning image. The text and official source link remain authoritative.
 
 Narration retention: the publisher retains clips for 48 hours after their last use, including across frontend releases. This prevents scheduled data updates from immediately breaking playback on an already-open dashboard. `npm test` covers retention, reuse and expiry.
+
+### Accessible chart readings
+
+Each of the four charts has a keyboard-operable “View chart data” disclosure. Tables use the same public, window-filtered series as the charts; event-analysis rainfall and flow retain their separate timestamps and units. Historical readings retain their full published range. Table rows are built only when expanded and are excluded from the established narration. No payload schema or scientific calculation changes are required.
+
+On narrow screens the observatory-location row scrolls away, while the identity and section navigation remain sticky. Below 360px the summary metrics use full-width rows. Failed feed loads show a plain-language message and a Retry button that reloads the page. The existing light/dark toggle is unchanged.

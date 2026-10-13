@@ -216,3 +216,36 @@ test('October refinements keep spoken summary transitions and selection markers 
   assert.equal(d.getElementById('heatmapWeekOutline').hasAttribute('hidden'),true);
  } finally {dom.window.close();}
 });
+test('chart data exposes filtered values, updates open tables and preserves narration', async () => {
+ const dom = await renderNarrationDocument(payload);
+ try {
+  const w=dom.window,d=w.document;
+  const spoken=w.readAloudText(d.getElementById('depthPanel'));
+  for (const prefix of ['rainfall','depth','response','historicalRange']) {
+   const details=d.getElementById(`${prefix}Data`); assert.ok(details);
+   details.open=true; details.ontoggle();
+   assert.ok(details.querySelectorAll('tbody tr').length>0);
+   assert.ok(details.querySelectorAll('th[scope="col"]').length>=2);
+  }
+  assert.equal(w.readAloudText(d.getElementById('depthPanel')),spoken);
+  const initial=d.querySelectorAll('#depthData tbody tr').length;
+  d.querySelector('[data-window-id="5d"]').click();
+  assert.match(d.querySelector('#depthData caption').textContent,/5 days/);
+  assert.ok(d.querySelectorAll('#depthData tbody tr').length>initial);
+  w.renderDepthChart({points:[{timestamp:'2026-10-13T10:00:00Z',value:0}]},{start:0,end:Date.now()});
+  assert.equal(d.querySelector('#depthData tbody tr td:last-child').textContent,'0');
+  w.renderDepthChart({points:[]}); assert.equal(d.getElementById('depthData').hidden,true);
+ } finally {dom.window.close();}
+});
+test('failed feed provides visible recovery without exposing technical error', async()=>{
+ const dom=await renderNarrationDocument(payload);
+ try {
+  const w=dom.window,d=w.document;
+  w.applyErrorState(new Error('Internal implementation detail'));
+  const notice=d.querySelector('.feed-error'); assert.equal(notice.getAttribute('role'),'alert');
+  assert.match(notice.textContent,/connection/); assert.doesNotMatch(notice.textContent,/Internal/);
+  assert.equal(notice.querySelector('button').textContent,'Retry');
+  for(const id of ['readings','observations','analysis','officialAlert']) assert.equal(d.getElementById(id).hidden,true);
+  d.querySelector('.skip-link').click(); assert.equal(d.activeElement.id,'heroMeta');
+ } finally {dom.window.close();}
+});

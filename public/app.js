@@ -57,6 +57,13 @@ function setupTheme() {
 
 async function main() {
   setupTheme();
+  const header = document.querySelector('.site-header');
+  const locations = document.querySelector('.observatory-nav');
+  const mobileHeader = window.matchMedia('(max-width: 39.999rem)');
+  const placeLocations = () => { if (mobileHeader.matches) header.after(locations); else header.append(locations); };
+  mobileHeader.addEventListener('change', placeLocations);
+  placeLocations();
+  document.querySelector('.skip-link').onclick = () => document.getElementById('observations').focus();
   try {
     const response = await fetch(payloadPath, { cache: "no-store" });
     if (!response.ok) {
@@ -479,6 +486,7 @@ function currentWindowLabel() {
 
 function renderRainfallChart(panel, reportingWindow) {
   const points = panel.points || [];
+  renderTimeData("rainfall", panel, points, panel.y_axis_label || "Rainfall (mm)");
   if (!points.length) {
     rainfallChart?.destroy();
     showEmptyChart(
@@ -531,6 +539,7 @@ function rainfallDataset(points, label, axis = "y") {
 
 function renderDepthChart(panel, reportingWindow) {
   const points = panel.points || [];
+  renderTimeData("depth", panel, points, panel.y_axis_label || "Water depth (m)");
   if (!points.length) {
     depthChart?.destroy();
     showEmptyChart(
@@ -572,6 +581,12 @@ function renderDepthChart(panel, reportingWindow) {
 }
 
 function renderResponseChart(panel, rainfallPanel, reportingWindow) {
+  const rows = panel.mode === "placeholder" || !panel.points?.length ? [] : [
+    ...(panel.points || []).map(p => [p.timestamp, panel.y_axis_label || "Flow rate (m³/s)", Number(p.value)]),
+    ...(rainfallPanel.points || []).map(p => [p.timestamp, panel.rainfall_y_axis_label || "Rainfall (mm)", Number(p.value)])
+  ].sort((a, b) => toEpochMs(a[0]) - toEpochMs(b[0]));
+  renderChartData("response", `${panel.title || "River flow and rainfall"} — ${currentWindowLabel()}`,
+    [`Date & Time (${displayTimeZone})`, "Measurement", "Value"], rows.map(r => [tableTimestamp(r[0]), r[1], r[2]]));
   if (panel.mode === "placeholder") {
     responseChart?.destroy();
     showEmptyChart(
@@ -643,6 +658,10 @@ function renderHistoricalRangeChart(panel) {
       date: point.date,
     }))
     .filter((point) => Number.isFinite(point.x) && Number.isFinite(point.y));
+
+  renderChartData("historicalRange", panel.title || "Daily range and peak levels",
+    ["Date", panel.x_axis_label || "Daily water-depth range (m)", panel.y_axis_label || "Maximum daily water depth (m)"],
+    points.map(p => [p.date, p.x, p.y]));
 
   if (!points.length) {
     historicalRangeChart?.destroy();
@@ -1583,33 +1602,68 @@ function fallbackReportingWindow(panels) {
 }
 
 function applyErrorState(error) {
-  text("heroEyebrow", "Flash Flood Observatory");
-  text("siteNameLine", "Public dashboard");
-  text("siteLocationLine", "");
-  document.getElementById("siteLocationLine").hidden = true;
-  text("heroStrapline", "The public payload could not be loaded.");
-  text("currentReadingValue", "Unavailable");
-  text(
-    "currentReadingNote",
-    "Refresh this page or open the current dashboard."
-  );
-  document.getElementById("windowSwitcher").hidden = true;
-  document.getElementById("officialAlert").hidden = true;
-  document.getElementById("analysisGrid").hidden = true;
-  document.getElementById("levelHeatmapPanel").hidden = true;
+  const notice = document.createElement("div");
+  notice.className = "feed-error";
+  notice.setAttribute("role", "alert");
+  const message = document.createElement("p");
+  message.textContent = "We couldn’t load the latest observations. Check your connection and try again.";
+  const retry = document.createElement("button");
+  retry.type = "button";
+  retry.className = "window-button";
+  retry.textContent = "Retry";
+  retry.onclick = () => { retry.disabled = true; retry.textContent = "Retrying…"; window.location.reload(); };
+  notice.append(message, retry);
+  document.getElementById("heroMeta").replaceChildren(notice);
+  text("heroStrapline", "Observations are temporarily unavailable.");
+  for (const id of ["readings", "observations", "analysis", "context", "officialAlert", "observatoryPartners"]) {
+    document.getElementById(id).hidden = true;
+  }
+  document.querySelector('.skip-link').href = "#heroMeta";
+  document.querySelector('.skip-link').textContent = "Skip to loading status";
+  document.getElementById('heroMeta').tabIndex = -1;
+  document.querySelector('.skip-link').onclick = () => document.getElementById('heroMeta').focus();
+}
 
-  document
-    .getElementById("heroMeta")
-    .replaceChildren(
-      renderMetaChip({ label: "Feed", value: "Unavailable" }),
-      renderMetaChip({
-        label: "Detail",
-        value: error.message || "The request failed.",
-      })
-    );
-  renderSummaryMetrics([]);
-  renderNotes([]);
-  renderFooter({});
+function tableTimestamp(value) {
+  return new Intl.DateTimeFormat("en-GB", {timeZone: displayTimeZone, dateStyle: "short", timeStyle: "short"}).format(new Date(value));
+}
+
+function renderTimeData(prefix, panel, points, unit) {
+  renderChartData(prefix, `${panel.title || unit} — ${currentWindowLabel()}`,
+    [`Date & Time (${displayTimeZone})`, unit], points.map(p => [tableTimestamp(p.timestamp), Number(p.value)]));
+}
+
+function renderChartData(prefix, caption, headings, rows) {
+  let details = document.getElementById(`${prefix}Data`);
+  if (!details) {
+    details = document.createElement("details");
+    details.id = `${prefix}Data`;
+    details.className = "chart-data";
+    const summary = document.createElement("summary");
+    summary.textContent = "View chart data";
+    summary.setAttribute("aria-label", `View chart data: ${document.getElementById(`${prefix}Title`).textContent}`);
+    details.append(summary);
+    document.getElementById(`${prefix}Chart`).closest('.chart-frame').after(details);
+  }
+  details.hidden = !rows.length;
+  const populate = () => {
+    details.querySelector('.chart-data-scroll')?.remove();
+    if (!details.open || !rows.length) return;
+    const scroll = document.createElement("div");
+    scroll.className = "chart-data-scroll";
+    scroll.tabIndex = 0;
+    scroll.setAttribute("role", "region");
+    scroll.setAttribute("aria-label", caption);
+    const table = document.createElement("table");
+    const title = table.createCaption(); title.textContent = caption;
+    const head = table.createTHead().insertRow();
+    headings.forEach(label => { const th = document.createElement("th"); th.scope = "col"; th.textContent = label; head.append(th); });
+    const body = table.createTBody();
+    rows.forEach(values => { const row = body.insertRow(); values.forEach(value => { row.insertCell().textContent = value == null ? "Unavailable" : String(value); }); });
+    scroll.append(table); details.append(scroll);
+  };
+  details.ontoggle = populate;
+  populate();
 }
 
 function showEmptyChart(prefix, message) {
@@ -1777,7 +1831,7 @@ function readAloudText(section) {
       return;
     }
     if (!(node instanceof Element) || node.hidden ||
-        node.matches('button, select, svg, canvas, script, #levelHeatmapDayDetail, #heatmapDayControl, .heatmap-legend, [aria-hidden="true"]') ||
+        node.matches('button, select, svg, canvas, script, .chart-data, #levelHeatmapDayDetail, #heatmapDayControl, .heatmap-legend, [aria-hidden="true"]') ||
         getComputedStyle(node).display === "none") return;
     node.childNodes.forEach(visit);
   }

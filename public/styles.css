@@ -1610,3 +1610,31 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
 }
 .partner-funding { color: #344b5b; font-size: .7rem; font-weight: 700; line-height: 1.4; }
 .partner-funding + img { max-width: min(10rem, 100%); }
+
+/* Accessibility and narrow-screen refinements; scientific presentation is unchanged. */
+.skip-link { color: var(--canvas); background: var(--ink); }
+.chart-data { min-width: 0; align-self: start; }
+.chart-data summary { padding-block: .75rem; color: var(--cyan); cursor: pointer; font-weight: 600; }
+.chart-data-scroll { max-height: 22rem; overflow: auto; border: 1px solid var(--line); border-radius: var(--radius-control); }
+.chart-data table { width: 100%; border-collapse: collapse; font-size: .85rem; font-variant-numeric: tabular-nums; }
+.chart-data caption { padding: .75rem; text-align: left; color: var(--muted); }
+.chart-data th, .chart-data td { padding: .65rem; text-align: left; border-bottom: 1px solid var(--line); }
+.chart-data thead th { position: sticky; top: 0; background: var(--surface); }
+.chart-data td { overflow-wrap: anywhere; }
+.feed-error { margin-block: 1rem; padding: 1rem; border: 1px solid var(--line-strong); border-radius: var(--radius-control); }
+.feed-error p { margin-bottom: .75rem; }
+@media (min-width: 62rem) {
+  .observation-grid .data-panel { grid-row: span 4; }
+  .analysis-grid .data-panel { grid-row: span 5; }
+}
+@media (max-width: 39.999rem) {
+  .site-header { border-bottom: 1px solid var(--line); }
+  html { scroll-padding-top: 8rem; }
+  .footer-contact { justify-self: start; text-align: left; }
+}
+@media (max-width: 22.499rem) {
+  .metric-ledger { grid-template-columns: minmax(0, 1fr); }
+  .metric-ledger .summary-card { grid-column: 1; grid-template-columns: minmax(0, 1fr) auto; align-items: center; border-right: 0; border-bottom: 1px solid var(--line); }
+  .metric-ledger .summary-card:last-child { border-bottom: 0; }
+  .summary-card .summary-note { grid-column: 1 / -1; }
+}
