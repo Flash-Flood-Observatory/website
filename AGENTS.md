@@ -3,7 +3,8 @@
 This repository has a hard public boundary:
 
 - only [`public/`](public) is deployable website content
-- root files like [`README.md`](README.md) and this file are maintainer-only
+- all tracked files, including [`README.md`](README.md) and this file, are public through the repository
+- private operational documentation belongs outside this repository
 
 Rules for future changes:
 
@@ -30,14 +31,6 @@ Rules for future changes:
 - Render one payload-provided hydrological year at a time, from 1 October through 30 September, and retain earlier years through the heatmap selector.
 - Keep the observed rainfall and Event Analysis rainfall axes automatic, but never allow their upper bound to fall below 1 mm.
 - The fifth summary card should reflect the all-time max 24h range record from the payload, not a client-side recomputation.
-
-Operational intent:
-
-- something running on the operational Windows side should generate the payload
-- that same sidecar currently syncs a local website repo clone, updates `public/data/site_payload.json`, and pushes back to GitHub
-- the public website should consume only the curated payload and static assets
-- do not assume the operational Windows machine can auto-update files outside its checked-out sidecar repo
-
 
 - The approved V3 dashboard is now the production homepage at `/`. Do not recreate versioned prototypes without a new request. Git history is the archive.
 - Retain compact statistics, equal-width chart pairs, full-year heatmap, grouped narration and system-default light/dark appearance.
