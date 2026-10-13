@@ -1602,4 +1602,11 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
   vector-effect: non-scaling-stroke;
   filter: drop-shadow(0 1px 1px #07131d);
 }
-.partner-funding { color: #344b5b; font-size: .7rem; font-weight: 700; }
+.partner-link:has(.partner-funding), .partner-badge:has(.partner-funding) {
+  align-content: center;
+  row-gap: .75rem;
+  padding: 1.25rem 1rem;
+  min-height: 7.5rem;
+}
+.partner-funding { color: #344b5b; font-size: .7rem; font-weight: 700; line-height: 1.4; }
+.partner-funding + img { max-width: min(10rem, 100%); }
