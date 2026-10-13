@@ -1602,14 +1602,11 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
   vector-effect: non-scaling-stroke;
   filter: drop-shadow(0 1px 1px #07131d);
 }
-.partner-link:has(.partner-funding), .partner-badge:has(.partner-funding) {
-  align-content: center;
-  row-gap: .75rem;
-  padding: 1.25rem 1rem;
-  min-height: 7.5rem;
-}
-.partner-funding { color: #344b5b; font-size: .7rem; font-weight: 700; line-height: 1.4; }
-.partner-funding + img { max-width: min(10rem, 100%); }
+/* Funding text belongs outside the white logo card, without stretching its row. */
+.partner-funded { position: relative; display: grid; min-width: 0; }
+.partner-funding { position: absolute; bottom: calc(100% + .4rem); left: 0; width: 100%; text-align: center; color: var(--muted); font-size: .75rem; font-weight: 700; line-height: 1.4; }
+.partner-strip { row-gap: 2.25rem; margin-top: 1.5rem; }
+.partner-funded img { max-width: min(10rem, 100%); }
 
 /* Accessibility and narrow-screen refinements; scientific presentation is unchanged. */
 .skip-link { color: var(--canvas); background: var(--ink); }

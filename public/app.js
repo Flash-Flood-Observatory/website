@@ -645,7 +645,8 @@ function renderResponseChart(panel, rainfallPanel, reportingWindow) {
       panel.rainfall_y_axis_label || "Rainfall (mm)",
       panel.y_axis_label || "Flow rate (m³/s)",
       hasRainfall,
-      positiveAxisFloor(panel.minimum_axis_max)
+      positiveAxisFloor(panel.minimum_axis_max),
+      responseDisplayLimits(flowPoints, rainfallPoints)
     ),
   });
 }
@@ -1160,9 +1161,9 @@ function heatmapSvg(panel) {
   return `
     <div class="heatmap-calendar-scroll" role="region" aria-label="Annual water-level calendar, scroll horizontally to explore the full year" tabindex="0"><svg class="level-heatmap-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMinYMin meet"  role="group" aria-label="${escapeHtml("Daily maximum water level (% of average)")}">
       <defs><pattern id="heatmap-no-data" width="1" height="1" patternContentUnits="objectBoundingBox"><rect width="1" height="1" fill="#68747d"/><path d="M0 1L1 0" stroke="#c0ccd5" stroke-width="0.0714286"/></pattern></defs>
-      <rect id="heatmapWeekOutline" x="0" y="${gridY - 3}" width="${step + 4}" height="${gridHeight + 6}" rx="3" fill="none" stroke="#f7de5e" stroke-width="2" pointer-events="none" hidden></rect>
       <rect class="level-heatmap-grid-outline" x="${gridX - 1}" y="${gridY - 1}" width="${gridWidth + 2}" height="${gridHeight + 2}" fill="none"></rect>
       ${cellMarkup}
+      <rect id="heatmapWeekOutline" x="0" y="${gridY - 3}" width="${step + 4}" height="${gridHeight + 6}" rx="3" fill="none" stroke="#f7de5e" stroke-width="2" pointer-events="none" hidden></rect>
       <rect id="heatmapDayOutline" width="${step - gap + 4}" height="${step - gap + 4}" rx="2" fill="none" pointer-events="none" hidden></rect>
       ${weekdayMarkup}
       ${monthMarkup}
@@ -1252,6 +1253,12 @@ function renderFooter(footer) {
 }
 
 function renderContactItem(item) {
+  if (item.email_base64) {
+    try {
+      const email = atob(item.email_base64).trim();
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) item = {...item, value: email, href: `mailto:${email}`};
+    } catch (_) { /* Malformed optional contact must not break the dashboard. */ }
+  }
   const row = document.createElement("p");
   row.className = "footer-contact-item";
 
@@ -1292,7 +1299,11 @@ function renderPartner(partner) {
     const funding = document.createElement("span");
     funding.className = "partner-funding";
     funding.textContent = "FUNDED BY";
-    wrapper.append(funding);
+    const group = document.createElement("div");
+    group.className = "partner-funded";
+    wrapper.append(image);
+    group.append(funding, wrapper);
+    return group;
   }
   wrapper.append(image);
   return wrapper;
@@ -1356,12 +1367,27 @@ function standardChartOptions(reportingWindow, yTitle, suggestedMax = null) {
   };
 }
 
+function responseDisplayLimits(flowPoints, rainfallPoints) {
+  const peak = points => points.reduce((max, p) => Number.isFinite(Number(p.value)) ? Math.max(max, Number(p.value)) : max, 0);
+  const flowPeak = peak(flowPoints), rainPeak = peak(rainfallPoints);
+  // Zero flow cannot truthfully be drawn above positive rainfall. Keep the fallback scale.
+  if (!(flowPeak > 0) || !rainfallPoints.length) return null;
+  const roundUp = value => {
+    const step = 10 ** (Math.floor(Math.log10(value)) - 1);
+    return Number((Math.ceil(value / step) * step).toPrecision(12));
+  };
+  const flow = roundUp(flowPeak / .85);
+  const flowHeight = flowPeak / flow;
+  return {flow, rain: roundUp(Math.max(1, rainPeak / (flowHeight * .7)))};
+}
+
 function responseChartOptions(
   reportingWindow,
   rainfallTitle,
   flowTitle,
   hasRainfall,
-  minimumAxisMax = null
+  minimumAxisMax = null,
+  displayLimits = null
 ) {
   const durationHours =
     (reportingWindow.end - reportingWindow.start) / 3_600_000;
@@ -1375,6 +1401,7 @@ function responseChartOptions(
       x: timeScale(reportingWindow, durationHours > 30 ? 8 : 6),
       yFlow: {
         ...(minimumAxisMax !== null ? { suggestedMax: minimumAxisMax } : {}),
+        ...(displayLimits ? {min: 0, max: displayLimits.flow} : {}),
         type: "linear",
         position: hasRainfall ? "right" : "left",
         beginAtZero: true,
@@ -1396,6 +1423,7 @@ function responseChartOptions(
               position: "left",
               beginAtZero: true,
               suggestedMax: 1,
+              ...(displayLimits ? {min: 0, max: displayLimits.rain} : {}),
               grid: { color: chartPalette.grid },
               ticks: { color: chartPalette.muted },
               title: {

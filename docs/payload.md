@@ -198,6 +198,7 @@ Contact item shape:
 - `label`
 - `value`
 - `href`
+- `email_base64` (optional): base64-encoded public email; the browser decodes it into selectable text and a `mailto:` link. For this variant, `value` and `href` are omitted. This deters basic text harvesting, not bots that execute JavaScript.
 
 Partner shape:
 

@@ -35,3 +35,5 @@ The [payload reference](docs/payload.md) describes the public data fields. Coord
 This is a public repository: documentation and configuration are public even when they are not served on the website. Keep credentials, private machine paths, raw private measurements and operational runbooks outside this repository.
 
 The [GitHub Pages workflow](.github/workflows/deploy-pages.yml) publishes only `public/`. This deployment boundary does not make other repository files private.
+
+The contact payload supports an optional `email_base64` item (see [payload contract](docs/payload.md)). The combined rainfall/flow chart uses independent zero-based display limits for positive-flow windows, placing the flow peak above the rainfall maximum; measurements, tooltip values and tables are unchanged. Zero-flow windows retain the fallback scale.

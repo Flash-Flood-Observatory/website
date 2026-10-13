@@ -5578,10 +5578,10 @@
       },
       "empty_message": "River flow event analysis is temporarily unavailable.",
       "eyebrow": "Event Analysis",
-      "footer_description": "This allows correlation between rainfall and the change of river level. It also helps show the response time of the river to rain and the speed at which the volume of water rises.",
+      "footer_description": "This allows correlation between rainfall and the change of river level. It also helps show the response time of the river to rain and the speed at which the volume of water rises. Rainfall and flow use independent zero-based axes. When flow is positive, the axes are scaled so the flow peak appears above the tallest rainfall bar; their plotted heights do not compare magnitudes.",
       "footer_descriptions": {
-        "24h": "This allows correlation between rainfall and the change of river level. It also helps show the response time of the river to rain and the speed at which the volume of water rises.",
-        "5d": "This allows correlation between rainfall and the change of river level. It also helps show the response time of the river to rain and the speed at which the volume of water rises."
+        "24h": "This allows correlation between rainfall and the change of river level. It also helps show the response time of the river to rain and the speed at which the volume of water rises. Rainfall and flow use independent zero-based axes. When flow is positive, the axes are scaled so the flow peak appears above the tallest rainfall bar; their plotted heights do not compare magnitudes.",
+        "5d": "This allows correlation between rainfall and the change of river level. It also helps show the response time of the river to rain and the speed at which the volume of water rises. Rainfall and flow use independent zero-based axes. When flow is positive, the axes are scaled so the flow peak appears above the tallest rainfall bar; their plotted heights do not compare magnitudes."
       },
       "minimum_axis_max": 0.04366487228173869,
       "mode": "flow_overlay",
@@ -7521,6 +7521,10 @@
   "footer": {
     "contact": {
       "items": [
+        {
+          "email_base64": "Zmxhc2hmbG9vZG9ic2VydmF0b3J5QGdtYWlsLmNvbQ==",
+          "label": "Email"
+        },
         {
           "href": "https://www.linkedin.com/company/flash-flood-observatory/",
           "label": "LinkedIn",

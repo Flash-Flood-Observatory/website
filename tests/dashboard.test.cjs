@@ -200,7 +200,7 @@ test('October refinements keep spoken summary transitions and selection markers 
   assert.equal((narration.match(/This is the /g)||[]).length,4);
   assert.match(narration,/This was recorded at the Flash Flood Observatory on 24th of January 2026/);
   assert.equal(d.querySelectorAll('.partner-funding').length,1);
-  assert.equal(d.querySelector('.partner-funding').nextElementSibling.alt,'Royal Society');
+  assert.equal(d.querySelector('.partner-funding').nextElementSibling.querySelector('img').alt,'Royal Society');
   d.querySelector('[data-window-id="5d"]').click();
   assert.equal(w.rainfallDataset([], 'Rain').barThickness,2);
   assert.equal(w.rainfallDataset([], 'Rain', 'yRain').barThickness,'flex');
@@ -248,4 +248,35 @@ test('failed feed provides visible recovery without exposing technical error', a
   for(const id of ['readings','observations','analysis','officialAlert']) assert.equal(d.getElementById(id).hidden,true);
   d.querySelector('.skip-link').click(); assert.equal(d.activeElement.id,'heroMeta');
  } finally {dom.window.close();}
+});
+test('professor refinements keep funding outside the card, email usable and selection above cells',async()=>{
+ const dom=await renderNarrationDocument(payload);
+ try {
+  const d=dom.window.document;
+  const group=d.querySelector('.partner-funded');
+  assert.equal(group.querySelector('a .partner-funding'),null);
+  assert.equal(group.firstElementChild.textContent,'FUNDED BY');
+  assert.ok(group.querySelector('a img[alt="Royal Society"]'));
+  const email=d.querySelector('#footerContactList a[href^="mailto:"]');
+  assert.ok(email); assert.equal(email.getAttribute('href'),'mailto:'+email.textContent);
+  assert.equal(email.hasAttribute('target'),false);
+  const outline=d.getElementById('heatmapWeekOutline'),cells=[...d.querySelectorAll('.level-heatmap-cell')];
+  for(const cell of cells) assert.ok(cell.compareDocumentPosition(outline)&dom.window.Node.DOCUMENT_POSITION_FOLLOWING);
+ }finally{dom.window.close();}
+});
+test('combined axes place positive flow peak above rainfall without clipping or shifting zero',async()=>{
+ const dom=await renderNarrationDocument(payload);
+ try {
+  const w=dom.window;
+  for(const [flow,rain] of [[.001,200],[25,.1],[.025,1.6],[10,0]]) {
+   const limits=w.responseDisplayLimits([{value:flow}],[{value:rain}]);
+   assert.ok(limits.flow>flow); assert.ok(limits.rain>=1 && limits.rain>=rain);
+   assert.ok(flow/limits.flow>rain/limits.rain);
+   const options=w.responseChartOptions({start:0,end:86400000},'Rain','Flow',true,.492,limits);
+   assert.equal(options.scales.yFlow.min,0); assert.equal(options.scales.yRain.min,0);
+   assert.equal(options.scales.yFlow.max,limits.flow);
+  }
+  assert.equal(w.responseDisplayLimits([{value:0}],[{value:1}]),null);
+  assert.equal(w.responseDisplayLimits([{value:.1}],[]),null);
+ }finally{dom.window.close();}
 });
