@@ -1587,3 +1587,19 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
 @media(max-width: 959px) {
   .heatmap-scroll-hint { display: block; margin: .35rem 0; color: var(--muted); font-size: .85rem; }
 }
+
+/* Selection remains distinct from the scientific colour scale in both themes. */
+#heatmapWeekOutline {
+  stroke: #ffe45c;
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 1px 1px #07131d);
+}
+:root[data-theme="light"] #heatmapWeekOutline { stroke: #ffe45c; }
+#heatmapDayOutline {
+  stroke: #fff;
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 1px 1px #07131d);
+}
+.partner-funding { color: #344b5b; font-size: .7rem; font-weight: 700; }

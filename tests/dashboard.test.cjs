@@ -178,7 +178,7 @@ test('review narration uses spoken dates, avoids repeated units and covers alert
   for (const id of ['rainfallPanel','depthPanel']) assert.doesNotMatch(w.readAloudText(d.getElementById(id)),/(metres|millimetres) \((metres|millimetres)\)/);
   assert.match(w.readAloudText(d.getElementById('responsePanel')),/measured every 15 minutes/);
   assert.match(w.readAloudText(d.getElementById('officialAlert')),/Environment Agency/);
-  assert.equal(w.readAloudText(d.getElementById('observatoryPartners')),'Observatory partners. University of Greenwich. University of Bath. Delft University of Technology. The Royal Society.');
+  assert.equal(w.readAloudText(d.getElementById('observatoryPartners')),'Observatory partners. University of Greenwich. University of Bath. Delft University of Technology, and funded by the Royal Society.');
   const heat=w.readAloudText(d.getElementById('levelHeatmapPanel'));
   assert.doesNotMatch(heat,/Week of Year|Day in selected|All weeks/);
   assert.match(heat,/0.3 times 0.172 metres equals 0.0516 metres/);
@@ -189,4 +189,30 @@ test('review narration uses spoken dates, avoids repeated units and covers alert
   assert.match(d.getElementById('rainfallDescription').textContent,/\.$/);
   assert.match(d.getElementById('depthDescription').textContent,/\.$/);
  }finally{dom.window.close();}
+});
+
+
+test('October refinements keep spoken summary transitions and selection markers in sync', async () => {
+ const dom=await renderNarrationDocument(payload);
+ try {
+  const w=dom.window,d=w.document;
+  const narration=w.readAloudText(d.getElementById('readings'));
+  assert.equal((narration.match(/This is the /g)||[]).length,4);
+  assert.match(narration,/This was recorded at the Flash Flood Observatory on 24th of January 2026/);
+  assert.equal(d.querySelectorAll('.partner-funding').length,1);
+  assert.equal(d.querySelector('.partner-funding').nextElementSibling.alt,'Royal Society');
+  d.querySelector('[data-window-id="5d"]').click();
+  assert.equal(w.rainfallDataset([], 'Rain').barThickness,2);
+  assert.equal(w.rainfallDataset([], 'Rain', 'yRain').barThickness,'flex');
+  d.querySelector('[data-window-id="24h"]').click();
+  assert.equal(w.rainfallDataset([], 'Rain').barThickness,'flex');
+  const period=d.getElementById('heatmapPeriodSelect');period.value='2025-26';period.dispatchEvent(new w.Event('change'));
+  const cell=d.querySelector('.level-heatmap-cell');cell.dispatchEvent(new w.Event('click'));
+  const marker=d.getElementById('heatmapDayOutline');
+  assert.equal(marker.hasAttribute('hidden'),false);
+  assert.equal(Number(marker.getAttribute('x')),Number(cell.getAttribute('x'))-2);
+  const week=d.getElementById('heatmapWeekSelect');week.value='';week.dispatchEvent(new w.Event('change'));
+  assert.equal(marker.hasAttribute('hidden'),true);
+  assert.equal(d.getElementById('heatmapWeekOutline').hasAttribute('hidden'),true);
+ } finally {dom.window.close();}
 });

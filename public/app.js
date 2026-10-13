@@ -523,7 +523,7 @@ function rainfallDataset(points, label, axis = "y") {
     borderColor: chartPalette.rain,
     borderWidth: 1.2,
     borderRadius: 2,
-    barThickness: "flex",
+    barThickness: axis === "y" && selectedTimeWindowId === "5d" ? 2 : "flex",
     maxBarThickness: 30,
     inflateAmount: 0,
   };
@@ -666,7 +666,7 @@ function renderHistoricalRangeChart(panel) {
               `${panel.subtitle || "Daily Range and Peak Levels"} (m)`,
             data: points,
             parsing: false,
-            pointBackgroundColor: `${chartPalette.moss}99`,
+            pointBackgroundColor: document.documentElement.dataset.theme === "light" ? `${chartPalette.moss}99` : chartPalette.moss,
             pointBorderColor: document.documentElement.dataset.theme === "light" ? "#195d35" : "#38965f",
             pointBorderWidth: 0.8,
             pointRadius: 2.5,
@@ -872,6 +872,13 @@ function setupHeatmapInteraction(panel) {
       outline.removeAttribute("hidden");
     }
     mount.updateWeekOutline?.();
+    const dayOutline = document.getElementById("heatmapDayOutline");
+    const selectedCell = cells.find(cell => cell.dataset.date === selectedHeatmapDate);
+    if (selectedCell) {
+      dayOutline.setAttribute("x", Number(selectedCell.getAttribute("x")) - 2);
+      dayOutline.setAttribute("y", Number(selectedCell.getAttribute("y")) - 2);
+      dayOutline.removeAttribute("hidden");
+    } else dayOutline.setAttribute("hidden", "");
     const day = byDate.get(selectedHeatmapDate);
     if (day) renderHeatmapDayDetail(day);
     else document.getElementById("levelHeatmapDayDetail").hidden = true;
@@ -1137,6 +1144,7 @@ function heatmapSvg(panel) {
       <rect id="heatmapWeekOutline" x="0" y="${gridY - 3}" width="${step + 4}" height="${gridHeight + 6}" rx="3" fill="none" stroke="#f7de5e" stroke-width="2" pointer-events="none" hidden></rect>
       <rect class="level-heatmap-grid-outline" x="${gridX - 1}" y="${gridY - 1}" width="${gridWidth + 2}" height="${gridHeight + 2}" fill="none"></rect>
       ${cellMarkup}
+      <rect id="heatmapDayOutline" width="${step - gap + 4}" height="${step - gap + 4}" rx="2" fill="none" pointer-events="none" hidden></rect>
       ${weekdayMarkup}
       ${monthMarkup}
       <text class="level-heatmap-axis-label" x="${gridX + gridWidth / 2}" y="${axisY}" text-anchor="middle">${escapeHtml(panel.x_axis_label || "Week of year")}</text>
@@ -1261,6 +1269,12 @@ function renderPartner(partner) {
   const image = document.createElement("img");
   image.src = publicAssetPath(partner.logo);
   image.alt = partner.name || "Partner logo";
+  if (/^(the )?royal society$/i.test(partner.name || "")) {
+    const funding = document.createElement("span");
+    funding.className = "partner-funding";
+    funding.textContent = "FUNDED BY";
+    wrapper.append(funding);
+  }
   wrapper.append(image);
   return wrapper;
 }
@@ -1751,7 +1765,7 @@ function heatmapSpeech() {
 }
 
 function readAloudText(section) {
-  if (section.id === "observatoryPartners") return "Observatory partners. University of Greenwich. University of Bath. Delft University of Technology. The Royal Society.";
+  if (section.id === "observatoryPartners") return "Observatory partners. University of Greenwich. University of Bath. Delft University of Technology, and funded by the Royal Society.";
   if (section.matches("#top .briefing__grid")) return introductionSpeech();
   if (section.id === "levelHeatmapPanel") return heatmapSpeech();
   if (section.id === "officialAlert") return [dashboardPayload.official_alert.eyebrow, dashboardPayload.official_alert.label, dashboardPayload.official_alert.message,
@@ -1767,7 +1781,18 @@ function readAloudText(section) {
         getComputedStyle(node).display === "none") return;
     node.childNodes.forEach(visit);
   }
-  visit(section);
+  if (section.id === "readings") {
+    section.querySelectorAll(".summary-card").forEach(card => {
+      const label = card.querySelector(".section-label").textContent;
+      const value = card.querySelector(".summary-value").textContent;
+      const note = card.querySelector(".summary-note").textContent;
+      const explanation = label === "Maximum Recorded 24h River Level Range"
+        ? note.replace(/^Recorded\b/i, "This was recorded")
+        : /^(Current|Highest|Lowest|Water depth)\b/i.test(note)
+          ? `This is the ${note.charAt(0).toLowerCase()}${note.slice(1)}` : note;
+      parts.push(label, value, explanation);
+    });
+  } else visit(section);
   if (section.id === "levelHeatmapPanel") parts.push(document.getElementById("heatmapPeriodSelect").selectedOptions[0]?.textContent || "");
   const explanations = {
     rainfallPanel: "The blue bars represent rainfall totals in millimetres.",
