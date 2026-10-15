@@ -37,3 +37,20 @@ This is a public repository: documentation and configuration are public even whe
 The [GitHub Pages workflow](.github/workflows/deploy-pages.yml) publishes only `public/`. This deployment boundary does not make other repository files private.
 
 The contact payload supports an optional `email_base64` item (see [payload contract](docs/payload.md)). The combined rainfall/flow chart uses independent zero-based display limits for positive-flow windows, placing the flow peak above the rainfall maximum; measurements, tooltip values and tables are unchanged. Zero-flow windows retain the fallback scale.
+
+### Today at the Observatory
+
+The optional `observatory_summary` payload provides three calendar-based narratives
+in UK local time: today to the latest observation, yesterday, and the five complete
+days before today. It sits between the introduction and river-level summary.
+Headlines reflect maximum minus minimum depth within each day (the largest daily
+range for the five-day tab), never a first-to-last trend or flood-warning status.
+Paragraphs use the same cleaned source measurements as the charts, and comparisons
+use the full-precision Observatory mean behind the heatmap. Missing rainfall is not
+zero: partial totals and depth coverage are stated explicitly.
+
+The renderer displays the supplied headline and paragraph, with keyboard-operable
+tabs and one read-aloud control. Changing tabs stops playback. Audio builds include
+every tab and expiry fallback. Current summaries expire within an hour, and all
+relative-day summaries expire at UK midnight. The weather symbol is omitted unless
+retrieval and reuse can be verified. Expandable chart-value tables are not shown.

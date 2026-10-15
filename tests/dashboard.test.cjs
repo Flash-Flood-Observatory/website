@@ -31,11 +31,11 @@ test('dashboard axes retain expandable floors and tooltips distinguish measureme
   assert.equal(label({dataset:{},parsed:{y:.12}}),'Water depth: 0.120 m');
  } finally {dom.window.close();}
 });
-test('dashboard ten grouped speakers expand units, remove repeated colours and have generated clip requests',async()=>{
+test('dashboard grouped speakers expand units, remove repeated colours and have generated clip requests',async()=>{
  const dom=await renderNarrationDocument(payload);
  try {
   const w=dom.window;
-  assert.equal(w.document.querySelectorAll('.read-aloud-button').length,10);
+  assert.equal(w.document.querySelectorAll('.read-aloud-button').length,10 + (payload.observatory_summary ? 1 : 0));
   assert.equal(w.readAloudAudioVersion,'alba-medium-20261007-v2');
   const stats=w.readAloudText(w.document.getElementById('readings'));
   assert.ok(stats.includes('24 hours')); assert.ok(stats.includes('metres')); assert.doesNotMatch(stats,/\b24h\b/);
@@ -216,25 +216,12 @@ test('October refinements keep spoken summary transitions and selection markers 
   assert.equal(d.getElementById('heatmapWeekOutline').hasAttribute('hidden'),true);
  } finally {dom.window.close();}
 });
-test('chart data exposes filtered values, updates open tables and preserves narration', async () => {
+test('chart value tables are removed and river narration retains its title', async () => {
  const dom = await renderNarrationDocument(payload);
  try {
   const w=dom.window,d=w.document;
-  const spoken=w.readAloudText(d.getElementById('depthPanel'));
-  for (const prefix of ['rainfall','depth','response','historicalRange']) {
-   const details=d.getElementById(`${prefix}Data`); assert.ok(details);
-   details.open=true; details.ontoggle();
-   assert.ok(details.querySelectorAll('tbody tr').length>0);
-   assert.ok(details.querySelectorAll('th[scope="col"]').length>=2);
-  }
-  assert.equal(w.readAloudText(d.getElementById('depthPanel')),spoken);
-  const initial=d.querySelectorAll('#depthData tbody tr').length;
-  d.querySelector('[data-window-id="5d"]').click();
-  assert.match(d.querySelector('#depthData caption').textContent,/5 days/);
-  assert.ok(d.querySelectorAll('#depthData tbody tr').length>initial);
-  w.renderDepthChart({points:[{timestamp:'2026-10-13T10:00:00Z',value:0}]},{start:0,end:Date.now()});
-  assert.equal(d.querySelector('#depthData tbody tr td:last-child').textContent,'0');
-  w.renderDepthChart({points:[]}); assert.equal(d.getElementById('depthData').hidden,true);
+  assert.equal(d.querySelectorAll('.chart-data').length,0);
+  assert.match(w.readAloudText(d.getElementById('readings')), /^River level summary\. Levels and ranges at the observatory\. Current River Level/);
  } finally {dom.window.close();}
 });
 test('failed feed provides visible recovery without exposing technical error', async()=>{

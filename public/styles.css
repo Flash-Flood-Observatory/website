@@ -57,7 +57,7 @@ html {
 }
 
 body {
-  min-width: 20rem;
+  min-width: 0;
   margin: 0;
   color: var(--ink);
   background: var(--canvas);
@@ -1573,7 +1573,7 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
 
 /* October review: consistent chart copy and a continuous annual calendar. */
 .data-panel-copy, .panel-footer-copy { font-size: 1rem; line-height: 1.55; }
-.analysis-subtitle { margin: .5rem 0 0; color: var(--ink); font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 600; }
+.section-heading > div:first-child > .analysis-subtitle { margin: .5rem 0 0; color: var(--ink); font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 600; }
 .heatmap-calendar-scroll { max-width: 100%; overflow-x: auto; padding: .5rem; border-radius: var(--radius-control); background: #172733; }
 .heatmap-calendar-scroll .level-heatmap-svg { display: block; width: 100%; min-width: 900px; }
 .heatmap-calendar-scroll .level-heatmap-axis, .heatmap-calendar-scroll .level-heatmap-month, .heatmap-calendar-scroll .level-heatmap-axis-label { fill: #d6e4ec; }
@@ -1610,14 +1610,6 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
 
 /* Accessibility and narrow-screen refinements; scientific presentation is unchanged. */
 .skip-link { color: var(--canvas); background: var(--ink); }
-.chart-data { min-width: 0; align-self: start; }
-.chart-data summary { padding-block: .75rem; color: var(--cyan); cursor: pointer; font-weight: 600; }
-.chart-data-scroll { max-height: 22rem; overflow: auto; border: 1px solid var(--line); border-radius: var(--radius-control); }
-.chart-data table { width: 100%; border-collapse: collapse; font-size: .85rem; font-variant-numeric: tabular-nums; }
-.chart-data caption { padding: .75rem; text-align: left; color: var(--muted); }
-.chart-data th, .chart-data td { padding: .65rem; text-align: left; border-bottom: 1px solid var(--line); }
-.chart-data thead th { position: sticky; top: 0; background: var(--surface); }
-.chart-data td { overflow-wrap: anywhere; }
 .feed-error { margin-block: 1rem; padding: 1rem; border: 1px solid var(--line-strong); border-radius: var(--radius-control); }
 .feed-error p { margin-bottom: .75rem; }
 @media (min-width: 62rem) {
@@ -1634,4 +1626,21 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
   .metric-ledger .summary-card { grid-column: 1; grid-template-columns: minmax(0, 1fr) auto; align-items: center; border-right: 0; border-bottom: 1px solid var(--line); }
   .metric-ledger .summary-card:last-child { border-bottom: 0; }
   .summary-card .summary-note { grid-column: 1 / -1; }
+}
+
+/* A compact narrative band using the existing dashboard's type and accents. */
+.today-summary { padding-block: 1rem 1.5rem; }
+.today-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.today-heading h2 { margin: 0; font-size: 1.1rem; }
+.today-heading .read-aloud-button { position: static; display: inline-flex; align-items: center; gap: .4rem; width: auto; min-height: 44px; padding: .35rem 0 .35rem .5rem; font-size: .8rem; white-space: nowrap; }
+.today-tabs { display: flex; gap: 1.25rem; border-bottom: 1px solid var(--line); margin-top: .4rem; }
+.today-tabs button { background: none; color: var(--muted); border: 0; border-bottom: 2px solid transparent; border-radius: 0; min-height: 44px; padding: .6rem 0; font: inherit; font-size: .85rem; cursor: pointer; }
+.today-tabs button[aria-selected="true"] { color: var(--cyan); border-bottom-color: currentColor; font-weight: 600; }
+.today-content { padding-top: .85rem; }
+.today-content h3 { margin: 0 0 .35rem; color: var(--ink); font-size: 1.05rem; }
+.today-content p { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.6; max-width: 105ch; }
+@media (max-width: 39.999rem) {
+  .today-heading { flex-wrap: wrap; gap: 0 .75rem; }
+  .today-tabs { gap: 1rem; }
+  .today-tabs button { font-size: .8rem; }
 }

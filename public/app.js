@@ -80,6 +80,7 @@ async function main() {
     applyHero(dashboardPayload.site || {}, dashboardPayload.status || {});
     renderOfficialAlert(dashboardPayload.official_alert || {});
     renderSummaryMetrics(dashboardPayload.summary_metrics || []);
+    renderObservatorySummary(dashboardPayload.observatory_summary);
     renderTimeWindowSwitcher(timeWindowState);
     renderDashboardPanels();
     renderAnalysisPanels();
@@ -92,6 +93,65 @@ async function main() {
     console.error(error);
     applyErrorState(error);
   }
+}
+
+var selectedSummaryId = "today";
+function selectedSummaryContent(now = Date.now()) {
+  const item = dashboardPayload?.observatory_summary?.periods?.find(period => period.id === selectedSummaryId);
+  if (!item) return null;
+  return now >= Date.parse(item.valid_until) ? item.stale : item;
+}
+function updateObservatorySummary() {
+  const section = document.getElementById("observatorySummary");
+  const content = selectedSummaryContent();
+  if (!content) return;
+  const heading = document.getElementById("todayHeadline");
+  const paragraph = document.getElementById("todayParagraph");
+  if (heading.textContent !== content.headline || paragraph.textContent !== content.paragraph) {
+    section.dispatchEvent(new Event("summarychange"));
+    heading.textContent = content.headline;
+    paragraph.textContent = content.paragraph;
+  }
+  document.getElementById("todayContent").setAttribute("aria-labelledby", `today-tab-${selectedSummaryId}`);
+  section.querySelectorAll('[role="tab"]').forEach(tab => {
+    const selected = tab.dataset.period === selectedSummaryId;
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+}
+function renderObservatorySummary(summary) {
+  const section = document.getElementById("observatorySummary");
+  if (!summary?.periods?.length) { section.hidden = true; return; }
+  section.hidden = false;
+  document.getElementById("todayTitle").textContent = summary.title;
+  const tabs = document.getElementById("todayTabs");
+  tabs.replaceChildren();
+  summary.periods.forEach(period => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.id = `today-tab-${period.id}`;
+    button.dataset.period = period.id;
+    button.textContent = period.label;
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-controls", "todayContent");
+    button.onclick = () => {
+      if (selectedSummaryId !== period.id) section.dispatchEvent(new Event("summarychange"));
+      selectedSummaryId = period.id;
+      updateObservatorySummary();
+    };
+    button.onkeydown = event => {
+      const buttons = [...tabs.children];
+      const index = buttons.indexOf(button);
+      const next = {ArrowRight: (index + 1) % buttons.length, ArrowLeft: (index + buttons.length - 1) % buttons.length, Home: 0, End: buttons.length - 1}[event.key];
+      if (next === undefined) return;
+      event.preventDefault(); buttons[next].focus(); buttons[next].click();
+    };
+    tabs.append(button);
+  });
+  updateObservatorySummary();
+  // Expire summaries in long-lived tabs too, including at UK midnight.
+  window.setInterval(updateObservatorySummary, 30000);
+  document.addEventListener("visibilitychange", updateObservatorySummary);
 }
 
 function restoreAnchorAfterRender() {
@@ -486,7 +546,6 @@ function currentWindowLabel() {
 
 function renderRainfallChart(panel, reportingWindow) {
   const points = panel.points || [];
-  renderTimeData("rainfall", panel, points, panel.y_axis_label || "Rainfall (mm)");
   if (!points.length) {
     rainfallChart?.destroy();
     showEmptyChart(
@@ -539,7 +598,6 @@ function rainfallDataset(points, label, axis = "y") {
 
 function renderDepthChart(panel, reportingWindow) {
   const points = panel.points || [];
-  renderTimeData("depth", panel, points, panel.y_axis_label || "Water depth (m)");
   if (!points.length) {
     depthChart?.destroy();
     showEmptyChart(
@@ -581,12 +639,6 @@ function renderDepthChart(panel, reportingWindow) {
 }
 
 function renderResponseChart(panel, rainfallPanel, reportingWindow) {
-  const rows = panel.mode === "placeholder" || !panel.points?.length ? [] : [
-    ...(panel.points || []).map(p => [p.timestamp, panel.y_axis_label || "Flow rate (m³/s)", Number(p.value)]),
-    ...(rainfallPanel.points || []).map(p => [p.timestamp, panel.rainfall_y_axis_label || "Rainfall (mm)", Number(p.value)])
-  ].sort((a, b) => toEpochMs(a[0]) - toEpochMs(b[0]));
-  renderChartData("response", `${panel.title || "River flow and rainfall"} — ${currentWindowLabel()}`,
-    [`Date & Time (${displayTimeZone})`, "Measurement", "Value"], rows.map(r => [tableTimestamp(r[0]), r[1], r[2]]));
   if (panel.mode === "placeholder") {
     responseChart?.destroy();
     showEmptyChart(
@@ -659,10 +711,6 @@ function renderHistoricalRangeChart(panel) {
       date: point.date,
     }))
     .filter((point) => Number.isFinite(point.x) && Number.isFinite(point.y));
-
-  renderChartData("historicalRange", panel.title || "Daily range and peak levels",
-    ["Date", panel.x_axis_label || "Daily water-depth range (m)", panel.y_axis_label || "Maximum daily water depth (m)"],
-    points.map(p => [p.date, p.x, p.y]));
 
   if (!points.length) {
     historicalRangeChart?.destroy();
@@ -1643,55 +1691,13 @@ function applyErrorState(error) {
   notice.append(message, retry);
   document.getElementById("heroMeta").replaceChildren(notice);
   text("heroStrapline", "Observations are temporarily unavailable.");
-  for (const id of ["readings", "observations", "analysis", "context", "officialAlert", "observatoryPartners"]) {
+  for (const id of ["observatorySummary", "readings", "observations", "analysis", "context", "officialAlert", "observatoryPartners"]) {
     document.getElementById(id).hidden = true;
   }
   document.querySelector('.skip-link').href = "#heroMeta";
   document.querySelector('.skip-link').textContent = "Skip to loading status";
   document.getElementById('heroMeta').tabIndex = -1;
   document.querySelector('.skip-link').onclick = () => document.getElementById('heroMeta').focus();
-}
-
-function tableTimestamp(value) {
-  return new Intl.DateTimeFormat("en-GB", {timeZone: displayTimeZone, dateStyle: "short", timeStyle: "short"}).format(new Date(value));
-}
-
-function renderTimeData(prefix, panel, points, unit) {
-  renderChartData(prefix, `${panel.title || unit} — ${currentWindowLabel()}`,
-    [`Date & Time (${displayTimeZone})`, unit], points.map(p => [tableTimestamp(p.timestamp), Number(p.value)]));
-}
-
-function renderChartData(prefix, caption, headings, rows) {
-  let details = document.getElementById(`${prefix}Data`);
-  if (!details) {
-    details = document.createElement("details");
-    details.id = `${prefix}Data`;
-    details.className = "chart-data";
-    const summary = document.createElement("summary");
-    summary.textContent = "View chart data";
-    summary.setAttribute("aria-label", `View chart data: ${document.getElementById(`${prefix}Title`).textContent}`);
-    details.append(summary);
-    document.getElementById(`${prefix}Chart`).closest('.chart-frame').after(details);
-  }
-  details.hidden = !rows.length;
-  const populate = () => {
-    details.querySelector('.chart-data-scroll')?.remove();
-    if (!details.open || !rows.length) return;
-    const scroll = document.createElement("div");
-    scroll.className = "chart-data-scroll";
-    scroll.tabIndex = 0;
-    scroll.setAttribute("role", "region");
-    scroll.setAttribute("aria-label", caption);
-    const table = document.createElement("table");
-    const title = table.createCaption(); title.textContent = caption;
-    const head = table.createTHead().insertRow();
-    headings.forEach(label => { const th = document.createElement("th"); th.scope = "col"; th.textContent = label; head.append(th); });
-    const body = table.createTBody();
-    rows.forEach(values => { const row = body.insertRow(); values.forEach(value => { row.insertCell().textContent = value == null ? "Unavailable" : String(value); }); });
-    scroll.append(table); details.append(scroll);
-  };
-  details.ontoggle = populate;
-  populate();
 }
 
 function showEmptyChart(prefix, message) {
@@ -1847,6 +1853,7 @@ function heatmapSpeech() {
 }
 
 function readAloudText(section) {
+  if (section.id === "observatorySummary") return selectedSummaryContent()?.speech || "";
   if (section.id === "observatoryPartners") return "Observatory partners. University of Greenwich. University of Bath. Delft University of Technology, and funded by the Royal Society.";
   if (section.matches("#top .briefing__grid")) return introductionSpeech();
   if (section.id === "levelHeatmapPanel") return heatmapSpeech();
@@ -1859,11 +1866,12 @@ function readAloudText(section) {
       return;
     }
     if (!(node instanceof Element) || node.hidden ||
-        node.matches('button, select, svg, canvas, script, .chart-data, #levelHeatmapDayDetail, #heatmapDayControl, .heatmap-legend, [aria-hidden="true"]') ||
+        node.matches('button, select, svg, canvas, script, #levelHeatmapDayDetail, #heatmapDayControl, .heatmap-legend, [aria-hidden="true"]') ||
         getComputedStyle(node).display === "none") return;
     node.childNodes.forEach(visit);
   }
   if (section.id === "readings") {
+    parts.push("River level summary", "Levels and ranges at the observatory");
     section.querySelectorAll(".summary-card").forEach(card => {
       const label = card.querySelector(".section-label").textContent;
       const value = card.querySelector(".summary-value").textContent;
@@ -1894,7 +1902,7 @@ function readAloudText(section) {
     .replace(/\b(\d{2})\/(\d{2})\/(\d{4})\b/g, (_, day, month, year) => spokenDate(`${year}-${month}-${day}`))
     .replace(/(white|blue|purple|brown)\s*\(?[⬜🟦🟪🟫]\)?/gu, "$1 square")
     .replace(/\b(\d+)h\b/gi, "$1 hours").replace(/m³\/s/g, "cubic metres per second")
-    .replace(/\bmm\b/g, "millimetres").replace(/\bm\b/g, "metres")
+    .replace(/\bmm\b/g, "millimetres").replace(/\bcm\b/g, "centimetres").replace(/\bm\b/g, "metres")
     .replace(/%/g, " percent")
     .replace(/⬜/g, "white square").replace(/🟦/g, "blue square")
     .replace(/🟪/g, "purple square").replace(/🟫/g, "brown square")
@@ -1932,11 +1940,13 @@ function setupReadAloud() {
       activeButton.setAttribute("aria-pressed", "false");
       activeButton.setAttribute("aria-label", activeButton.dataset.readLabel);
       activeButton.title = activeButton.dataset.readLabel;
+      const visibleLabel = activeButton.querySelector("span");
+      if (visibleLabel) visibleLabel.textContent = "Read aloud";
     }
     activeButton = null;
     status.textContent = "";
   }
-  document.querySelectorAll('#top .briefing__grid, #readings, .data-panel, .heatmap-panel, #context, #officialAlert, #observatoryPartners').forEach((section) => {
+  document.querySelectorAll('#top .briefing__grid, #observatorySummary:not([hidden]), #readings, .data-panel, .heatmap-panel, #context, #officialAlert, #observatoryPartners').forEach((section) => {
     const heading = [...section.querySelectorAll('h1, h2, h3, .panel-subtitle')]
       .find((item) => item.textContent.trim() && !item.hidden && getComputedStyle(item).display !== "none")
       || section.querySelector(".panel-label");
@@ -1950,7 +1960,10 @@ function setupReadAloud() {
     button.title = button.dataset.readLabel;
     button.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3zM16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/></svg>';
     section.classList.add("read-aloud-section");
-    if (section.id === "readings") section.querySelector(".summary-heading").append(button);
+    if (section.id === "observatorySummary") {
+      button.insertAdjacentHTML("beforeend", "<span>Read aloud</span>");
+      section.querySelector(".today-heading").append(button);
+    } else if (section.id === "readings") section.querySelector(".summary-heading").append(button);
     else if (section.id === "observatoryPartners") section.querySelector(".partners-heading").append(button);
     else section.prepend(button);
     button.addEventListener("click", async () => {
@@ -1961,6 +1974,8 @@ function setupReadAloud() {
       button.setAttribute("aria-pressed", "true");
       button.setAttribute("aria-label", `Stop reading: ${label}`);
       button.title = `Stop reading: ${label}`;
+      const visibleLabel = button.querySelector("span");
+      if (visibleLabel) visibleLabel.textContent = "Stop reading";
       status.textContent = `Loading British English audio for ${label}. Press again to stop.`;
       const token = generation;
       function failed() {
@@ -1986,6 +2001,7 @@ function setupReadAloud() {
   });
   document.querySelector(".window-switcher")?.addEventListener("click", stop);
   document.getElementById("heatmapPeriodSelect")?.addEventListener("change", stop);
+  document.getElementById("observatorySummary")?.addEventListener("summarychange", stop);
   window.addEventListener("pagehide", stop);
 }
 

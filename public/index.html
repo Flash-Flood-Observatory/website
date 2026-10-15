@@ -35,9 +35,9 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="styles.css?v=20261013d">
+    <link rel="stylesheet" href="styles.css?v=20261015a">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
-    <script src="app.js?v=20261013d" defer></script>
+    <script src="app.js?v=20261015a" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#observations">Skip to observations</a>
@@ -88,6 +88,15 @@
               <g id="mapMarker"><circle r="4" fill="#91e3f2" stroke="#03070b" stroke-width="1.5"/><path d="M-4 -3l-16 -16h-54" fill="none" stroke="#91e3f2"/><text id="mapLabel" x="-74" y="-24" fill="#91e3f2" font-size="13" font-weight="700">Boscastle</text></g>
             </svg>
           </aside>
+        </div>
+      </section>
+
+      <section class="today-summary content-frame" id="observatorySummary" aria-labelledby="todayTitle" hidden>
+        <div class="today-heading"><h2 id="todayTitle">Today at the Observatory</h2></div>
+        <div class="today-tabs" id="todayTabs" role="tablist" aria-label="Summary period"></div>
+        <div id="todayContent" class="today-content" role="tabpanel" tabindex="0" aria-labelledby="today-tab-today">
+          <h3 id="todayHeadline"></h3>
+          <p id="todayParagraph"></p>
         </div>
       </section>
 

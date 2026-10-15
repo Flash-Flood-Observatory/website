@@ -69,6 +69,14 @@ async function collectNarration(payload, variant = '') {
         }
       }
     }
+    // Include every tab and expiry fallback, regardless of the build clock.
+    for (const period of payload.observatory_summary?.periods || []) {
+      for (const content of [period, period.stale]) {
+        if (!content?.speech) continue;
+        const hash = crypto.createHash('sha256').update(window.readAloudAudioVersion + '\n' + content.speech).digest('hex');
+        requests.set(hash, {hash, text: content.speech, version: window.readAloudAudioVersion});
+      }
+    }
     return [...requests.values()];
   } finally { window.close(); }
 }

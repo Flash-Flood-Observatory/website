@@ -205,3 +205,17 @@ Partner shape:
 - `name`
 - `logo`
 - `href`
+
+## Calendar summary
+
+Optional `observatory_summary`: `{title, timezone, periods}`. Each period has
+`id` (`today`, `yesterday`, `five_days`), `label`, `headline`, `paragraph`, `speech`,
+`valid_until` (ISO timestamp), and `stale: {headline, paragraph, speech}`. Calculations
+and scientific classifications belong to the producer, not the browser. Speech
+expands measurement units and percentages. The normal and stale text are both
+included in the audio manifest. Old payloads without this object hide the panel.
+
+`panels.rainfall.synthetic_zero` identifies the legacy empty-response chart series.
+It must never establish coverage or a zero-rain narrative. `official_alert.checked_at`
+is the feed retrieval time, separate from the notice's issue/update time, and
+`official_alert.notices` contains active `{severity_level, area_label}` entries.
