@@ -7982,14 +7982,14 @@
         "headline": "River levels steady",
         "id": "today",
         "label": "Today so far",
-        "paragraph": "Available readings recorded 9.6 mm of rain so far today, but the rainfall total is incomplete, with water depth ranging from 3.5 to 8.5 cm and the latest reading at 5.8 cm. Today\u2019s highest water depth so far is around 50% below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
-        "speech": "River levels steady. Available readings recorded 9.6 millimetres of rain so far today, but the rainfall total is incomplete, with water depth ranging from 3.5 to 8.5 centimetres and the latest reading at 5.8 centimetres. Today\u2019s highest water depth so far is around 50 percent below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "paragraph": "Available readings recorded 11 mm of rain so far today, but the rainfall total is incomplete, with water depth ranging from 3.5 to 8.5 cm and the latest reading at 5.8 cm. Today\u2019s highest water depth so far is around 50% below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "speech": "River levels steady. Available readings recorded 11 millimetres of rain so far today, but the rainfall total is incomplete, with water depth ranging from 3.5 to 8.5 centimetres and the latest reading at 5.8 centimetres. Today\u2019s highest water depth so far is around 50 percent below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-15T22:18:52.922776+00:00"
+        "valid_until": "2026-10-15T22:33:53.675186+00:00"
       },
       {
         "headline": "River levels steady",
@@ -8023,7 +8023,7 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-10-15T21:18:52.351539Z",
+    "checked_at": "2026-10-15T21:33:50.846998Z",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -8036,7 +8036,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-10-15T21:18:52.558992Z"
+    "updated_at": "2026-10-15T21:33:53.101857Z"
   },
   "panels": {
     "depth": {
@@ -10338,7 +10338,7 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-10-15T20:30:00Z",
+      "last_updated": "2026-10-15T21:00:00Z",
       "points": [
         {
           "timestamp": "2026-10-09T23:00:00Z",
@@ -12603,6 +12603,14 @@
         {
           "timestamp": "2026-10-15T20:30:00Z",
           "value": 2.4
+        },
+        {
+          "timestamp": "2026-10-15T20:45:00Z",
+          "value": 0.8
+        },
+        {
+          "timestamp": "2026-10-15T21:00:00Z",
+          "value": 0.6
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -12640,7 +12648,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-15T21:18:52.922690Z",
+    "published_at": "2026-10-15T21:33:53.675087Z",
     "state": "Online"
   },
   "summary_metrics": [
