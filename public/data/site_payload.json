@@ -7829,7 +7829,7 @@
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-15T12:18:54.690973+00:00"
+        "valid_until": "2026-10-15T12:33:59.530330+00:00"
       },
       {
         "headline": "River levels steady",
@@ -7863,7 +7863,7 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-10-15T11:18:52.887063Z",
+    "checked_at": "2026-10-15T11:33:56.741448Z",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -7876,7 +7876,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-10-15T11:18:54.335181Z"
+    "updated_at": "2026-10-15T11:33:59.189869Z"
   },
   "panels": {
     "depth": {
@@ -12168,7 +12168,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-15T11:18:54.690904Z",
+    "published_at": "2026-10-15T11:33:59.530234Z",
     "state": "Online"
   },
   "summary_metrics": [
