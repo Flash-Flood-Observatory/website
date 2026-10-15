@@ -8039,7 +8039,7 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-10-15T22:18:50.472155Z",
+    "checked_at": "2026-10-15T22:34:04.486066Z",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -8052,7 +8052,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-10-15T22:19:08.673270Z"
+    "updated_at": "2026-10-15T22:34:04.751814Z"
   },
   "panels": {
     "depth": {
@@ -12680,7 +12680,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-15T22:19:09.135669Z",
+    "published_at": "2026-10-15T22:34:05.129856Z",
     "state": "Online"
   },
   "summary_metrics": [
