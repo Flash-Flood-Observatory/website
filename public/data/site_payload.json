@@ -7831,7 +7831,7 @@
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-16T10:48:53.768017+00:00"
+        "valid_until": "2026-10-16T11:03:56.644026+00:00"
       },
       {
         "headline": "River levels steady",
@@ -7865,7 +7865,7 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-10-16T09:48:51.118915Z",
+    "checked_at": "2026-10-16T10:03:55.916066Z",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -7878,7 +7878,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-10-16T09:48:53.423941Z"
+    "updated_at": "2026-10-16T10:03:56.303670Z"
   },
   "panels": {
     "depth": {
@@ -9996,7 +9996,7 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-10-16T09:15:00Z",
+      "last_updated": "2026-10-16T09:30:00Z",
       "points": [
         {
           "timestamp": "2026-10-10T23:00:00Z",
@@ -12081,6 +12081,10 @@
         {
           "timestamp": "2026-10-16T09:15:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-16T09:30:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -12118,7 +12122,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-16T09:48:53.767948Z",
+    "published_at": "2026-10-16T10:03:56.643952Z",
     "state": "Online"
   },
   "summary_metrics": [
