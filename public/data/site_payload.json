@@ -7864,8 +7864,8 @@
         "headline": "River levels steady",
         "id": "today",
         "label": "Today so far",
-        "paragraph": "Available readings recorded 3 mm of rain so far today, but the rainfall total is incomplete, with water depth ranging from 6.1 to 8.7 cm and the latest reading at 8.5 cm. Today\u2019s highest water depth so far is around 48% below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
-        "speech": "River levels steady. Available readings recorded 3 millimetres of rain so far today, but the rainfall total is incomplete, with water depth ranging from 6.1 to 8.7 centimetres and the latest reading at 8.5 centimetres. Today\u2019s highest water depth so far is around 48 percent below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "paragraph": "3 mm of rain has been recorded today, with water depth ranging from 6.1 to 8.7 cm and the latest reading at 8.5 cm. Today\u2019s highest water depth so far is around 48% below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "speech": "River levels steady. 3 millimetres of rain has been recorded today, with water depth ranging from 6.1 to 8.7 centimetres and the latest reading at 8.5 centimetres. Today\u2019s highest water depth so far is around 48 percent below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",

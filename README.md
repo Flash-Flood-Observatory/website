@@ -47,7 +47,9 @@ Headlines reflect maximum minus minimum depth within each day (the largest daily
 range for the five-day tab), never a first-to-last trend or flood-warning status.
 Paragraphs use the same cleaned source measurements as the charts, and comparisons
 use the full-precision Observatory mean behind the heatmap. Missing rainfall is not
-zero: partial totals and depth coverage are stated explicitly.
+zero: partial totals and depth coverage are stated explicitly. Positive rainfall
+recorded today uses the approved simpler wording “X mm of rain has been recorded
+today”, while retaining the underlying coverage checks.
 
 The renderer displays the supplied headline and paragraph, with keyboard-operable
 tabs and one read-aloud control. Changing tabs stops playback. Audio builds include
