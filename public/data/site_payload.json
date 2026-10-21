@@ -7986,14 +7986,14 @@
         "headline": "River levels steady",
         "id": "today",
         "label": "Today so far",
-        "paragraph": "15.2 mm of rain has been recorded today, with water depth ranging from 4.7 to 12.7 cm and the latest reading at 7.2 cm. Today\u2019s highest water depth so far is around 24% below the Observatory average. Current Environment Agency flood alert and warning information is unavailable.",
-        "speech": "River levels steady. 15.2 millimetres of rain has been recorded today, with water depth ranging from 4.7 to 12.7 centimetres and the latest reading at 7.2 centimetres. Today\u2019s highest water depth so far is around 24 percent below the Observatory average. Current Environment Agency flood alert and warning information is unavailable.",
+        "paragraph": "15.2 mm of rain has been recorded today, with water depth ranging from 4.7 to 12.7 cm and the latest reading at 7.2 cm. Today\u2019s highest water depth so far is around 24% below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "speech": "River levels steady. 15.2 millimetres of rain has been recorded today, with water depth ranging from 4.7 to 12.7 centimetres and the latest reading at 7.2 centimetres. Today\u2019s highest water depth so far is around 24 percent below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-21T12:49:23.228353+00:00"
+        "valid_until": "2026-10-21T13:03:53.543256+00:00"
       },
       {
         "headline": "River levels steady",
@@ -8027,20 +8027,20 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-10-21T11:48:51.702079Z",
+    "checked_at": "2026-10-21T12:03:52.586972Z",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
-    "label": "Official Environment Agency flood alerts and warnings unavailable",
-    "message": "The Environment Agency flood warning feed could not be reached during this update.",
+    "label": "There are no flood warnings or alerts.",
+    "message": "No Environment Agency flood warnings or alerts are currently active in Boscastle, Cornwall.",
     "notices": [],
     "reference_url": "https://environment.data.gov.uk/flood-monitoring/doc/reference",
     "severity": null,
     "severity_level": null,
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
-    "state": "unavailable",
-    "updated_at": "2026-10-21T11:49:22.888351Z"
+    "state": "none",
+    "updated_at": "2026-10-21T12:03:53.208368Z"
   },
   "panels": {
     "depth": {
@@ -12352,7 +12352,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-21T11:49:23.228271Z",
+    "published_at": "2026-10-21T12:03:53.543177Z",
     "state": "Online"
   },
   "summary_metrics": [
