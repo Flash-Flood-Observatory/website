@@ -2158,7 +2158,7 @@
       "description": "This heatmap shows the maximum daily water depth as a percentage of the average water depth recorded since the Flash Flood Observatory deployment in November 2025 (0.167 m). Each cell represents a specific day of the week and month within the selected hydrological year (1 October to 30 September), allowing patterns in river behaviour to be compared without the heatmap growing indefinitely. The colours indicate how each day's maximum level compares to the average: days close to the average appear white (\u2b1c), wetter-than-average days appear blue (\ud83d\udfe6) or purple (\ud83d\udfea), and drier-than-average days appear brown (\ud83d\udfeb).",
       "empty_message": "Daily maximum river-level heatmap data will appear here after the historical record is built.",
       "eyebrow": "River Levels",
-      "footer_description": "This makes it easy to identify periods of typical flow, sustained dry spells, and clusters of high-water days associated with storm events or rapid catchment response. A value such as 30% means the river reached 0.30 \u00d7 the average (0.30 \u00d7 0.167 m = 0.0502 m, represented in brown \ud83d\udfeb), while the highest band (>450%) represents days above 4.50 \u00d7 the average (>4.50 \u00d7 0.167 m = >0.7527 m, represented in purple \ud83d\udfea).",
+      "footer_description": "This makes it easy to identify periods of typical flow, sustained dry spells, and clusters of high-water days associated with storm events or rapid catchment response. A value such as 30% means the river reached 0.30 \u00d7 the average (0.30 \u00d7 0.167 m = 0.0502 m, represented in brown \ud83d\udfeb), while the highest band (>450%) represents days above 4.50 \u00d7 the average (>4.50 \u00d7 0.167 m = >0.7526 m, represented in purple \ud83d\udfea).",
       "hydrological_years": [
         {
           "cells": [
@@ -2507,8 +2507,8 @@
               "date_label": "10/12/2025",
               "difference_from_average_m": 0.321,
               "max_level_m": 0.489,
-              "percent_difference_from_average": 192.1,
-              "percent_of_average": 292.1,
+              "percent_difference_from_average": 192.2,
+              "percent_of_average": 292.2,
               "week_index": 5,
               "weekday_index": 2
             },
@@ -2627,8 +2627,8 @@
               "date_label": "22/12/2025",
               "difference_from_average_m": 0.198,
               "max_level_m": 0.365,
-              "percent_difference_from_average": 118.1,
-              "percent_of_average": 218.1,
+              "percent_difference_from_average": 118.2,
+              "percent_of_average": 218.2,
               "week_index": 7,
               "weekday_index": 0
             },
@@ -2827,8 +2827,8 @@
               "date_label": "11/01/2026",
               "difference_from_average_m": 0.086,
               "max_level_m": 0.254,
-              "percent_difference_from_average": 51.6,
-              "percent_of_average": 151.6,
+              "percent_difference_from_average": 51.7,
+              "percent_of_average": 151.7,
               "week_index": 9,
               "weekday_index": 6
             },
@@ -2915,7 +2915,7 @@
             {
               "date": "2026-01-20",
               "date_label": "20/01/2026",
-              "difference_from_average_m": 0.445,
+              "difference_from_average_m": 0.446,
               "max_level_m": 0.613,
               "percent_difference_from_average": 266.4,
               "percent_of_average": 366.4,
@@ -2947,8 +2947,8 @@
               "date_label": "23/01/2026",
               "difference_from_average_m": 0.689,
               "max_level_m": 0.856,
-              "percent_difference_from_average": 411.9,
-              "percent_of_average": 511.9,
+              "percent_difference_from_average": 412.0,
+              "percent_of_average": 512.0,
               "week_index": 11,
               "weekday_index": 4
             },
@@ -3747,8 +3747,8 @@
               "date_label": "13/04/2026",
               "difference_from_average_m": 0.071,
               "max_level_m": 0.238,
-              "percent_difference_from_average": 42.4,
-              "percent_of_average": 142.4,
+              "percent_difference_from_average": 42.5,
+              "percent_of_average": 142.5,
               "week_index": 23,
               "weekday_index": 0
             },
@@ -4467,8 +4467,8 @@
               "date_label": "24/06/2026",
               "difference_from_average_m": -0.012,
               "max_level_m": 0.155,
-              "percent_difference_from_average": -7.5,
-              "percent_of_average": 92.5,
+              "percent_difference_from_average": -7.4,
+              "percent_of_average": 92.6,
               "week_index": 33,
               "weekday_index": 2
             },
@@ -4525,7 +4525,7 @@
             {
               "date": "2026-06-30",
               "date_label": "30/06/2026",
-              "difference_from_average_m": -0.047,
+              "difference_from_average_m": -0.046,
               "max_level_m": 0.121,
               "percent_difference_from_average": -27.8,
               "percent_of_average": 72.2,
@@ -4637,8 +4637,8 @@
               "date_label": "11/07/2026",
               "difference_from_average_m": 0.003,
               "max_level_m": 0.17,
-              "percent_difference_from_average": 1.7,
-              "percent_of_average": 101.7,
+              "percent_difference_from_average": 1.8,
+              "percent_of_average": 101.8,
               "week_index": 35,
               "weekday_index": 5
             },
@@ -4795,7 +4795,7 @@
             {
               "date": "2026-07-27",
               "date_label": "27/07/2026",
-              "difference_from_average_m": -0.047,
+              "difference_from_average_m": -0.046,
               "max_level_m": 0.121,
               "percent_difference_from_average": -27.8,
               "percent_of_average": 72.2,
@@ -5820,14 +5820,6 @@
       "minimum_axis_max": 0.04366487228173869,
       "mode": "flow_overlay",
       "points": [
-        {
-          "timestamp": "2026-10-16T22:30:00Z",
-          "value": 0.006063
-        },
-        {
-          "timestamp": "2026-10-16T22:45:00Z",
-          "value": 0.006206
-        },
         {
           "timestamp": "2026-10-16T23:00:00Z",
           "value": 0.006278
@@ -7743,6 +7735,14 @@
         {
           "timestamp": "2026-10-21T22:30:00Z",
           "value": 0.005467
+        },
+        {
+          "timestamp": "2026-10-21T22:45:00Z",
+          "value": 0.005423
+        },
+        {
+          "timestamp": "2026-10-21T23:00:00Z",
+          "value": 0.005042
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -7809,24 +7809,24 @@
   "observatory_summary": {
     "periods": [
       {
-        "headline": "Insufficient readings",
+        "headline": "River levels steady",
         "id": "today",
         "label": "Today so far",
-        "paragraph": "Rainfall readings are unavailable so far today. There are insufficient water-depth readings for this period. Water-depth readings are delayed. There are currently no Environment Agency flood alerts or warnings for this location.",
-        "speech": "Insufficient readings. Rainfall readings are unavailable so far today. There are insufficient water-depth readings for this period. Water-depth readings are delayed. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "paragraph": "0.8 mm of rain has been recorded today, with water depth ranging from 7.3 to 7.8 cm and the latest reading at 7.6 cm. Today\u2019s highest water depth so far is around 53% below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "speech": "River levels steady. 0.8 millimetres of rain has been recorded today, with water depth ranging from 7.3 to 7.8 centimetres and the latest reading at 7.6 centimetres. Today\u2019s highest water depth so far is around 53 percent below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-22T00:04:06.154517+00:00"
+        "valid_until": "2026-10-22T00:18:52.839757+00:00"
       },
       {
         "headline": "River levels steady",
         "id": "yesterday",
         "label": "Yesterday",
-        "paragraph": "Available readings recorded 27.6 mm of rain yesterday, but the rainfall total is incomplete, with water depth ranging from 4.7 to 12.7 cm. Yesterday\u2019s highest water depth was around 24% below the Observatory average. Some water-depth readings are missing, so the observed range may be incomplete.",
-        "speech": "River levels steady. Available readings recorded 27.6 millimetres of rain yesterday, but the rainfall total is incomplete, with water depth ranging from 4.7 to 12.7 centimetres. Yesterday\u2019s highest water depth was around 24 percent below the Observatory average. Some water-depth readings are missing, so the observed range may be incomplete.",
+        "paragraph": "Available readings recorded 27.6 mm of rain yesterday, but the rainfall total is incomplete, with water depth ranging from 4.7 to 12.7 cm. Yesterday\u2019s highest water depth was around 24% below the Observatory average.",
+        "speech": "River levels steady. Available readings recorded 27.6 millimetres of rain yesterday, but the rainfall total is incomplete, with water depth ranging from 4.7 to 12.7 centimetres. Yesterday\u2019s highest water depth was around 24 percent below the Observatory average.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings.",
@@ -7838,8 +7838,8 @@
         "headline": "River levels steady",
         "id": "five_days",
         "label": "Last 5 days",
-        "paragraph": "Available readings recorded 29.4 mm of rain over the last five complete days, but the rainfall total is incomplete, with water depth ranging from 2.6 to 12.7 cm. The maximum depth in the available readings was recorded on 21 October 2026 and was around 24% below the Observatory average. Some water-depth readings are missing, so the observed range may be incomplete.",
-        "speech": "River levels steady. Available readings recorded 29.4 millimetres of rain over the last five complete days, but the rainfall total is incomplete, with water depth ranging from 2.6 to 12.7 centimetres. The maximum depth in the available readings was recorded on 21st of October 2026 and was around 24 percent below the Observatory average. Some water-depth readings are missing, so the observed range may be incomplete.",
+        "paragraph": "Available readings recorded 29.4 mm of rain over the last five complete days, but the rainfall total is incomplete, with water depth ranging from 2.6 to 12.7 cm. The maximum depth over the five days was recorded on 21 October 2026 and was around 24% below the Observatory average.",
+        "speech": "River levels steady. Available readings recorded 29.4 millimetres of rain over the last five complete days, but the rainfall total is incomplete, with water depth ranging from 2.6 to 12.7 centimetres. The maximum depth over the five days was recorded on 21st of October 2026 and was around 24 percent below the Observatory average.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings.",
@@ -7853,7 +7853,7 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-10-21T23:04:02.787240Z",
+    "checked_at": "2026-10-21T23:18:51.095414Z",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -7866,7 +7866,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-10-21T23:04:05.793917Z"
+    "updated_at": "2026-10-21T23:18:52.524147Z"
   },
   "panels": {
     "depth": {
@@ -7879,14 +7879,6 @@
       "eyebrow": "River Levels",
       "minimum_axis_max": 0.173,
       "points": [
-        {
-          "timestamp": "2026-10-16T22:30:00Z",
-          "value": 0.081
-        },
-        {
-          "timestamp": "2026-10-16T22:45:00Z",
-          "value": 0.082
-        },
         {
           "timestamp": "2026-10-16T23:00:00Z",
           "value": 0.082
@@ -9802,6 +9794,14 @@
         {
           "timestamp": "2026-10-21T22:30:00Z",
           "value": 0.078
+        },
+        {
+          "timestamp": "2026-10-21T22:45:00Z",
+          "value": 0.078
+        },
+        {
+          "timestamp": "2026-10-21T23:00:00Z",
+          "value": 0.076
         }
       ],
       "title": "Observed Water Depth",
@@ -9816,12 +9816,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-10-21T22:30:00Z",
+      "last_updated": "2026-10-21T23:00:00Z",
       "points": [
-        {
-          "timestamp": "2026-10-16T22:45:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-10-16T23:00:00Z",
           "value": 0.0
@@ -11729,6 +11725,14 @@
         {
           "timestamp": "2026-10-21T22:30:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-21T22:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-21T23:00:00Z",
+          "value": 0.8
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -11740,17 +11744,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-10-21T22:44:00Z",
-    "start_timestamp": "2026-10-20T22:45:00Z"
+    "end_timestamp": "2026-10-21T23:14:00Z",
+    "start_timestamp": "2026-10-20T23:15:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-10-21T22:44:00Z",
-      "start_timestamp": "2026-10-20T22:45:00Z"
+      "end_timestamp": "2026-10-21T23:14:00Z",
+      "start_timestamp": "2026-10-20T23:15:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-10-21T22:44:00Z",
-      "start_timestamp": "2026-10-16T22:45:00Z"
+      "end_timestamp": "2026-10-21T23:14:00Z",
+      "start_timestamp": "2026-10-16T23:15:00Z"
     }
   },
   "site": {
@@ -11766,7 +11770,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-21T23:04:06.154422Z",
+    "published_at": "2026-10-21T23:18:52.839682Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -11775,7 +11779,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.081
+      "value": 0.076
     },
     {
       "decimals": 3,
