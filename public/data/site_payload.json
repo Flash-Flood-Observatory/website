@@ -7949,6 +7949,14 @@
         {
           "timestamp": "2026-10-21T13:30:00Z",
           "value": 0.005203
+        },
+        {
+          "timestamp": "2026-10-21T13:45:00Z",
+          "value": 0.005189
+        },
+        {
+          "timestamp": "2026-10-21T14:00:00Z",
+          "value": 0.004984
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -8025,7 +8033,7 @@
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-21T15:04:10.685496+00:00"
+        "valid_until": "2026-10-21T15:19:11.676427+00:00"
       },
       {
         "headline": "River levels steady",
@@ -8059,7 +8067,7 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-10-21T14:04:08.441793Z",
+    "checked_at": "2026-10-21T14:19:00.488210Z",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -8072,7 +8080,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-10-21T14:04:10.339575Z"
+    "updated_at": "2026-10-21T14:19:11.330907Z"
   },
   "panels": {
     "depth": {
@@ -10240,6 +10248,14 @@
         {
           "timestamp": "2026-10-21T13:30:00Z",
           "value": 0.077
+        },
+        {
+          "timestamp": "2026-10-21T13:45:00Z",
+          "value": 0.077
+        },
+        {
+          "timestamp": "2026-10-21T14:00:00Z",
+          "value": 0.075
         }
       ],
       "title": "Observed Water Depth",
@@ -12410,17 +12426,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-10-21T13:44:00Z",
-    "start_timestamp": "2026-10-20T13:45:00Z"
+    "end_timestamp": "2026-10-21T14:14:00Z",
+    "start_timestamp": "2026-10-20T14:15:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-10-21T13:44:00Z",
-      "start_timestamp": "2026-10-20T13:45:00Z"
+      "end_timestamp": "2026-10-21T14:14:00Z",
+      "start_timestamp": "2026-10-20T14:15:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-10-21T13:44:00Z",
-      "start_timestamp": "2026-10-16T13:45:00Z"
+      "end_timestamp": "2026-10-21T14:14:00Z",
+      "start_timestamp": "2026-10-16T14:15:00Z"
     }
   },
   "site": {
@@ -12436,7 +12452,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-21T14:04:10.685415Z",
+    "published_at": "2026-10-21T14:19:11.676352Z",
     "state": "Online"
   },
   "summary_metrics": [
