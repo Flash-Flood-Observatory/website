@@ -7725,6 +7725,14 @@
         {
           "timestamp": "2026-10-20T23:30:00Z",
           "value": 0.004134
+        },
+        {
+          "timestamp": "2026-10-20T23:45:00Z",
+          "value": 0.004134
+        },
+        {
+          "timestamp": "2026-10-21T00:00:00Z",
+          "value": 0.004134
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -7794,14 +7802,14 @@
         "headline": "River levels steady",
         "id": "today",
         "label": "Today so far",
-        "paragraph": "0.4 mm of rain has been recorded today, with water depth ranging from 6.9 to 7.3 cm and the latest reading at 7 cm. Today\u2019s highest water depth so far is around 56% below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
-        "speech": "River levels steady. 0.4 millimetres of rain has been recorded today, with water depth ranging from 6.9 to 7.3 centimetres and the latest reading at 7 centimetres. Today\u2019s highest water depth so far is around 56 percent below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "paragraph": "0.8 mm of rain has been recorded today, with water depth ranging from 6.9 to 7.3 cm and the latest reading at 7 cm. Today\u2019s highest water depth so far is around 56% below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "speech": "River levels steady. 0.8 millimetres of rain has been recorded today, with water depth ranging from 6.9 to 7.3 centimetres and the latest reading at 7 centimetres. Today\u2019s highest water depth so far is around 56 percent below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-21T01:03:57.781582+00:00"
+        "valid_until": "2026-10-21T01:18:52.127096+00:00"
       },
       {
         "headline": "River levels steady",
@@ -7835,7 +7843,7 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-10-21T00:03:52.854941Z",
+    "checked_at": "2026-10-21T00:18:51.408060Z",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -7848,7 +7856,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-10-21T00:03:57.467835Z"
+    "updated_at": "2026-10-21T00:18:51.806443Z"
   },
   "panels": {
     "depth": {
@@ -9792,13 +9800,21 @@
         {
           "timestamp": "2026-10-20T23:30:00Z",
           "value": 0.07
+        },
+        {
+          "timestamp": "2026-10-20T23:45:00Z",
+          "value": 0.07
+        },
+        {
+          "timestamp": "2026-10-21T00:00:00Z",
+          "value": 0.07
         }
       ],
       "title": "Observed Water Depth",
       "y_axis_label": "Water Depth (m)"
     },
     "rainfall": {
-      "data_url": "https://environment.data.gov.uk/flood-monitoring/data/readings?parameter=rainfall&stationReference=49149&startdate=2026-10-15&enddate=2026-10-20&_sorted=&_limit=10000",
+      "data_url": "https://environment.data.gov.uk/flood-monitoring/data/readings?parameter=rainfall&stationReference=49149&startdate=2026-10-15&enddate=2026-10-21&_sorted=&_limit=10000",
       "description": "Rainfall measured every 15 minutes over the last 24 hours, plotted in millimetres (mm) on the left and Date & Time along the bottom at Environment Agency station 49149",
       "descriptions": {
         "24h": "Rainfall measured every 15 minutes over the last 24 hours, plotted in millimetres (mm) on the left and Date & Time along the bottom at Environment Agency station 49149",
@@ -9806,7 +9822,7 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-10-20T23:30:00Z",
+      "last_updated": "2026-10-21T00:00:00Z",
       "points": [
         {
           "timestamp": "2026-10-15T23:00:00Z",
@@ -11739,6 +11755,14 @@
         {
           "timestamp": "2026-10-20T23:30:00Z",
           "value": 0.2
+        },
+        {
+          "timestamp": "2026-10-20T23:45:00Z",
+          "value": 0.2
+        },
+        {
+          "timestamp": "2026-10-21T00:00:00Z",
+          "value": 0.2
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -11750,17 +11774,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-10-20T23:44:00Z",
-    "start_timestamp": "2026-10-19T23:45:00Z"
+    "end_timestamp": "2026-10-21T00:14:00Z",
+    "start_timestamp": "2026-10-20T00:15:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-10-20T23:44:00Z",
-      "start_timestamp": "2026-10-19T23:45:00Z"
+      "end_timestamp": "2026-10-21T00:14:00Z",
+      "start_timestamp": "2026-10-20T00:15:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-10-20T23:44:00Z",
-      "start_timestamp": "2026-10-15T23:45:00Z"
+      "end_timestamp": "2026-10-21T00:14:00Z",
+      "start_timestamp": "2026-10-16T00:15:00Z"
     }
   },
   "site": {
@@ -11776,7 +11800,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-21T00:03:57.781508Z",
+    "published_at": "2026-10-21T00:18:52.127020Z",
     "state": "Online"
   },
   "summary_metrics": [
