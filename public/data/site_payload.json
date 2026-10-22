@@ -8095,6 +8095,14 @@
         {
           "timestamp": "2026-10-22T21:00:00Z",
           "value": 0.022834
+        },
+        {
+          "timestamp": "2026-10-22T21:15:00Z",
+          "value": 0.029005
+        },
+        {
+          "timestamp": "2026-10-22T21:30:00Z",
+          "value": 0.064595
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -8164,14 +8172,14 @@
         "headline": "River levels steady",
         "id": "today",
         "label": "Today so far",
-        "paragraph": "14.6 mm of rain has been recorded today, with water depth ranging from 7.3 to 16.3 cm and the latest reading at 13.7 cm. Today\u2019s highest water depth so far is around 3% below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
-        "speech": "River levels steady. 14.6 millimetres of rain has been recorded today, with water depth ranging from 7.3 to 16.3 centimetres and the latest reading at 13.7 centimetres. Today\u2019s highest water depth so far is around 3 percent below the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "paragraph": "14.6 mm of rain has been recorded today, with water depth ranging from 7.3 to 23.9 cm and the latest reading at 23.9 cm. Today\u2019s highest water depth so far is around 43% above the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "speech": "River levels steady. 14.6 millimetres of rain has been recorded today, with water depth ranging from 7.3 to 23.9 centimetres and the latest reading at 23.9 centimetres. Today\u2019s highest water depth so far is around 43 percent above the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-22T22:33:56.026374+00:00"
+        "valid_until": "2026-10-22T22:48:57.977129+00:00"
       },
       {
         "headline": "River levels steady",
@@ -8205,7 +8213,7 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-10-22T21:33:53.041889Z",
+    "checked_at": "2026-10-22T21:48:56.786555Z",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -8218,7 +8226,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-10-22T21:33:55.658842Z"
+    "updated_at": "2026-10-22T21:48:57.574975Z"
   },
   "panels": {
     "depth": {
@@ -10506,6 +10514,14 @@
         {
           "timestamp": "2026-10-22T21:00:00Z",
           "value": 0.135
+        },
+        {
+          "timestamp": "2026-10-22T21:15:00Z",
+          "value": 0.148
+        },
+        {
+          "timestamp": "2026-10-22T21:30:00Z",
+          "value": 0.201
         }
       ],
       "title": "Observed Water Depth",
@@ -10520,7 +10536,7 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-10-22T21:00:00Z",
+      "last_updated": "2026-10-22T21:30:00Z",
       "points": [
         {
           "timestamp": "2026-10-16T23:00:00Z",
@@ -12785,6 +12801,14 @@
         {
           "timestamp": "2026-10-22T21:00:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-22T21:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-22T21:30:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -12796,17 +12820,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-10-22T21:14:00Z",
-    "start_timestamp": "2026-10-21T21:15:00Z"
+    "end_timestamp": "2026-10-22T21:44:00Z",
+    "start_timestamp": "2026-10-21T21:45:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-10-22T21:14:00Z",
-      "start_timestamp": "2026-10-21T21:15:00Z"
+      "end_timestamp": "2026-10-22T21:44:00Z",
+      "start_timestamp": "2026-10-21T21:45:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-10-22T21:14:00Z",
-      "start_timestamp": "2026-10-17T21:15:00Z"
+      "end_timestamp": "2026-10-22T21:44:00Z",
+      "start_timestamp": "2026-10-17T21:45:00Z"
     }
   },
   "site": {
@@ -12822,7 +12846,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-22T21:33:56.026300Z",
+    "published_at": "2026-10-22T21:48:57.977054Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -12831,14 +12855,14 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.137
+      "value": 0.239
     },
     {
       "decimals": 3,
       "label": "Maximum 24h River Level",
       "note": "Highest recorded water depth in the last 24 hours at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.163
+      "value": 0.239
     },
     {
       "decimals": 3,
@@ -12852,7 +12876,7 @@
       "label": "Current 24h River Level Range",
       "note": "Water depth range recorded in the last 24 hours (max to min) at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.103
+      "value": 0.179
     },
     {
       "decimals": 3,
