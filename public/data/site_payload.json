@@ -8112,14 +8112,14 @@
         "headline": "Moderate changes in river level",
         "id": "today",
         "label": "Today so far",
-        "paragraph": "28 mm of rain has been recorded today, with water depth ranging from 16.3 to 48.3 cm and the latest reading at 48.3 cm. Today\u2019s highest water depth so far is around 189% above the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
-        "speech": "Moderate changes in river level. 28 millimetres of rain has been recorded today, with water depth ranging from 16.3 to 48.3 centimetres and the latest reading at 48.3 centimetres. Today\u2019s highest water depth so far is around 189 percent above the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "paragraph": "28 mm of rain has been recorded today, with water depth ranging from 16.3 to 48.3 cm and the latest reading at 48.3 cm. Today\u2019s highest water depth so far is around 189% above the Observatory average. An Environment Agency flood alert is currently in place for North Cornwall coast from The Rumps to Hartland Point, flooding is possible.",
+        "speech": "Moderate changes in river level. 28 millimetres of rain has been recorded today, with water depth ranging from 16.3 to 48.3 centimetres and the latest reading at 48.3 centimetres. Today\u2019s highest water depth so far is around 189 percent above the Observatory average. An Environment Agency flood alert is currently in place for North Cornwall coast from The Rumps to Hartland Point, flooding is possible.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-24T15:48:54.991734+00:00"
+        "valid_until": "2026-10-24T16:03:58.940849+00:00"
       },
       {
         "headline": "River levels steady",
@@ -8153,20 +8153,26 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-10-24T14:48:52.941403Z",
-    "count": 0,
+    "area_label": "North Cornwall coast from The Rumps to Hartland Point",
+    "checked_at": "2026-10-24T15:03:54.393439Z",
+    "count": 1,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
-    "label": "There are no flood warnings or alerts.",
-    "message": "No Environment Agency flood warnings or alerts are currently active in Boscastle, Cornwall.",
-    "notices": [],
+    "label": "Flood Alert in force",
+    "message": "Environment Agency Flood Alert currently active in Boscastle, Cornwall. Flooding is possible. Be prepared.",
+    "notices": [
+      {
+        "area_label": "North Cornwall coast from The Rumps to Hartland Point",
+        "severity_level": 3
+      }
+    ],
     "reference_url": "https://environment.data.gov.uk/flood-monitoring/doc/reference",
-    "severity": null,
-    "severity_level": null,
+    "severity": "Flood alert",
+    "severity_level": 3,
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
-    "state": "none",
-    "updated_at": "2026-10-24T14:48:54.634633Z"
+    "state": "flood_alert",
+    "updated_at": "2026-10-24T15:56:00"
   },
   "panels": {
     "depth": {
@@ -12562,7 +12568,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-24T14:48:54.991651Z",
+    "published_at": "2026-10-24T15:03:58.940762Z",
     "state": "Online"
   },
   "summary_metrics": [
