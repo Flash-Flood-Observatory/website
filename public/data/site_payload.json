@@ -8027,6 +8027,14 @@
         {
           "timestamp": "2026-10-24T13:30:00Z",
           "value": 0.198848
+        },
+        {
+          "timestamp": "2026-10-24T13:45:00Z",
+          "value": 0.296586
+        },
+        {
+          "timestamp": "2026-10-24T14:00:00Z",
+          "value": 0.496554
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -8093,17 +8101,17 @@
   "observatory_summary": {
     "periods": [
       {
-        "headline": "River levels steady",
+        "headline": "Moderate changes in river level",
         "id": "today",
         "label": "Today so far",
-        "paragraph": "24.2 mm of rain has been recorded today, with water depth ranging from 16.3 to 32.4 cm and the latest reading at 32.4 cm. Today\u2019s highest water depth so far is around 94% above the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
-        "speech": "River levels steady. 24.2 millimetres of rain has been recorded today, with water depth ranging from 16.3 to 32.4 centimetres and the latest reading at 32.4 centimetres. Today\u2019s highest water depth so far is around 94 percent above the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "paragraph": "26.2 mm of rain has been recorded today, with water depth ranging from 16.3 to 42.3 cm and the latest reading at 42.3 cm. Today\u2019s highest water depth so far is around 153% above the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "speech": "Moderate changes in river level. 26.2 millimetres of rain has been recorded today, with water depth ranging from 16.3 to 42.3 centimetres and the latest reading at 42.3 centimetres. Today\u2019s highest water depth so far is around 153 percent above the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-24T15:03:55.305600+00:00"
+        "valid_until": "2026-10-24T15:18:55.625091+00:00"
       },
       {
         "headline": "River levels steady",
@@ -8137,7 +8145,7 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-10-24T14:03:52.127141Z",
+    "checked_at": "2026-10-24T14:18:53.089727Z",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -8150,7 +8158,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-10-24T14:03:54.958065Z"
+    "updated_at": "2026-10-24T14:18:55.269031Z"
   },
   "panels": {
     "depth": {
@@ -10318,6 +10326,14 @@
         {
           "timestamp": "2026-10-24T13:30:00Z",
           "value": 0.31
+        },
+        {
+          "timestamp": "2026-10-24T13:45:00Z",
+          "value": 0.344
+        },
+        {
+          "timestamp": "2026-10-24T14:00:00Z",
+          "value": 0.397
         }
       ],
       "title": "Observed Water Depth",
@@ -10332,7 +10348,7 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-10-24T13:30:00Z",
+      "last_updated": "2026-10-24T14:00:00Z",
       "points": [
         {
           "timestamp": "2026-10-18T23:00:00Z",
@@ -12477,6 +12493,14 @@
         {
           "timestamp": "2026-10-24T13:30:00Z",
           "value": 2.0
+        },
+        {
+          "timestamp": "2026-10-24T13:45:00Z",
+          "value": 1.0
+        },
+        {
+          "timestamp": "2026-10-24T14:00:00Z",
+          "value": 1.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -12488,17 +12512,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-10-24T13:44:00Z",
-    "start_timestamp": "2026-10-23T13:45:00Z"
+    "end_timestamp": "2026-10-24T14:14:00Z",
+    "start_timestamp": "2026-10-23T14:15:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-10-24T13:44:00Z",
-      "start_timestamp": "2026-10-23T13:45:00Z"
+      "end_timestamp": "2026-10-24T14:14:00Z",
+      "start_timestamp": "2026-10-23T14:15:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-10-24T13:44:00Z",
-      "start_timestamp": "2026-10-19T13:45:00Z"
+      "end_timestamp": "2026-10-24T14:14:00Z",
+      "start_timestamp": "2026-10-19T14:15:00Z"
     }
   },
   "site": {
@@ -12514,7 +12538,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-24T14:03:55.305525Z",
+    "published_at": "2026-10-24T14:18:55.625026Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -12523,14 +12547,14 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.324
+      "value": 0.423
     },
     {
       "decimals": 3,
       "label": "Maximum 24h River Level",
       "note": "Highest recorded water depth in the last 24 hours at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.324
+      "value": 0.423
     },
     {
       "decimals": 3,
@@ -12544,7 +12568,7 @@
       "label": "Current 24h River Level Range",
       "note": "Water depth range recorded in the last 24 hours (max to min) at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.16
+      "value": 0.26
     },
     {
       "decimals": 3,
