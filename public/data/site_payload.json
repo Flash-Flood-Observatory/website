@@ -8155,6 +8155,14 @@
         {
           "timestamp": "2026-10-24T21:30:00Z",
           "value": 0.318358
+        },
+        {
+          "timestamp": "2026-10-24T21:45:00Z",
+          "value": 0.314768
+        },
+        {
+          "timestamp": "2026-10-24T22:00:00Z",
+          "value": 0.324938
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -8224,8 +8232,8 @@
         "headline": "Moderate changes in river level",
         "id": "today",
         "label": "Today so far",
-        "paragraph": "35.2 mm of rain has been recorded today, with water depth ranging from 16.3 to 50.4 cm and the latest reading at 35 cm. Today\u2019s highest water depth so far is around 201% above the Observatory average. An Environment Agency flood alert is currently in place for North Cornwall coast from The Rumps to Hartland Point, flooding is possible.",
-        "speech": "Moderate changes in river level. 35.2 millimetres of rain has been recorded today, with water depth ranging from 16.3 to 50.4 centimetres and the latest reading at 35 centimetres. Today\u2019s highest water depth so far is around 201 percent above the Observatory average. An Environment Agency flood alert is currently in place for North Cornwall coast from The Rumps to Hartland Point, flooding is possible.",
+        "paragraph": "35.2 mm of rain has been recorded today, with water depth ranging from 16.3 to 50.4 cm and the latest reading at 35.3 cm. Today\u2019s highest water depth so far is around 201% above the Observatory average. An Environment Agency flood alert is currently in place for North Cornwall coast from The Rumps to Hartland Point, flooding is possible.",
+        "speech": "Moderate changes in river level. 35.2 millimetres of rain has been recorded today, with water depth ranging from 16.3 to 50.4 centimetres and the latest reading at 35.3 centimetres. Today\u2019s highest water depth so far is around 201 percent above the Observatory average. An Environment Agency flood alert is currently in place for North Cornwall coast from The Rumps to Hartland Point, flooding is possible.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
@@ -8266,7 +8274,7 @@
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
     "area_label": "North Cornwall coast from The Rumps to Hartland Point",
-    "checked_at": "2026-10-24T22:03:57.393698Z",
+    "checked_at": "2026-10-24T22:18:51.065536Z",
     "count": 1,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -10580,6 +10588,14 @@
         {
           "timestamp": "2026-10-24T21:30:00Z",
           "value": 0.351
+        },
+        {
+          "timestamp": "2026-10-24T21:45:00Z",
+          "value": 0.35
+        },
+        {
+          "timestamp": "2026-10-24T22:00:00Z",
+          "value": 0.353
         }
       ],
       "title": "Observed Water Depth",
@@ -12878,17 +12894,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-10-24T21:44:00Z",
-    "start_timestamp": "2026-10-23T21:45:00Z"
+    "end_timestamp": "2026-10-24T22:14:00Z",
+    "start_timestamp": "2026-10-23T22:15:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-10-24T21:44:00Z",
-      "start_timestamp": "2026-10-23T21:45:00Z"
+      "end_timestamp": "2026-10-24T22:14:00Z",
+      "start_timestamp": "2026-10-23T22:15:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-10-24T21:44:00Z",
-      "start_timestamp": "2026-10-19T21:45:00Z"
+      "end_timestamp": "2026-10-24T22:14:00Z",
+      "start_timestamp": "2026-10-19T22:15:00Z"
     }
   },
   "site": {
@@ -12904,7 +12920,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-24T22:03:58.055995Z",
+    "published_at": "2026-10-24T22:18:56.879546Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -12913,7 +12929,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.35
+      "value": 0.353
     },
     {
       "decimals": 3,
