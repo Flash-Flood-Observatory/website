@@ -8164,14 +8164,14 @@
         "headline": "River levels steady",
         "id": "today",
         "label": "Today so far",
-        "paragraph": "Rainfall readings are unavailable so far today, with water depth ranging from 26.4 to 40 cm and the latest reading at 33.5 cm. Today\u2019s highest water depth so far is around 138% above the Observatory average. An Environment Agency flood alert is currently in place for North Cornwall coast from The Rumps to Hartland Point, flooding is possible.",
-        "speech": "River levels steady. Rainfall readings are unavailable so far today, with water depth ranging from 26.4 to 40 centimetres and the latest reading at 33.5 centimetres. Today\u2019s highest water depth so far is around 138 percent above the Observatory average. An Environment Agency flood alert is currently in place for North Cornwall coast from The Rumps to Hartland Point, flooding is possible.",
+        "paragraph": "Rainfall readings are unavailable so far today, with water depth ranging from 26.4 to 40 cm and the latest reading at 33.5 cm. Today\u2019s highest water depth so far is around 138% above the Observatory average. Current Environment Agency flood alert and warning information is unavailable.",
+        "speech": "River levels steady. Rainfall readings are unavailable so far today, with water depth ranging from 26.4 to 40 centimetres and the latest reading at 33.5 centimetres. Today\u2019s highest water depth so far is around 138 percent above the Observatory average. Current Environment Agency flood alert and warning information is unavailable.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-26T15:49:21.137057+00:00"
+        "valid_until": "2026-10-26T16:04:51.071575+00:00"
       },
       {
         "headline": "River levels steady",
@@ -8205,26 +8205,20 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "area_label": "North Cornwall coast from The Rumps to Hartland Point",
-    "checked_at": "2026-10-26T14:49:20.588454Z",
-    "count": 1,
+    "checked_at": "2026-10-26T15:04:20.477883Z",
+    "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
-    "label": "Flood Alert in force",
-    "message": "Environment Agency Flood Alert currently active in Boscastle, Cornwall. Flooding is possible. Be prepared.",
-    "notices": [
-      {
-        "area_label": "North Cornwall coast from The Rumps to Hartland Point",
-        "severity_level": 3
-      }
-    ],
+    "label": "Official Environment Agency flood alerts and warnings unavailable",
+    "message": "The Environment Agency flood warning feed could not be reached during this update.",
+    "notices": [],
     "reference_url": "https://environment.data.gov.uk/flood-monitoring/doc/reference",
-    "severity": "Flood alert",
-    "severity_level": 3,
+    "severity": null,
+    "severity_level": null,
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
-    "state": "flood_alert",
-    "updated_at": "2026-10-26T12:44:00"
+    "state": "unavailable",
+    "updated_at": "2026-10-26T15:04:50.677506Z"
   },
   "panels": {
     "depth": {
@@ -10459,7 +10453,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-26T14:49:21.136971Z",
+    "published_at": "2026-10-26T15:04:51.071497Z",
     "state": "Online"
   },
   "summary_metrics": [
