@@ -8110,14 +8110,14 @@
         "headline": "River levels steady",
         "id": "today",
         "label": "Today so far",
-        "paragraph": "1.4 mm of rain has been recorded today, with water depth ranging from 27.1 to 31.1 cm and the latest reading at 27.4 cm. Today\u2019s highest water depth so far is around 85% above the Observatory average. An Environment Agency flood alert is currently in place for North Cornwall coast from The Rumps to Hartland Point, flooding is possible.",
-        "speech": "River levels steady. 1.4 millimetres of rain has been recorded today, with water depth ranging from 27.1 to 31.1 centimetres and the latest reading at 27.4 centimetres. Today\u2019s highest water depth so far is around 85 percent above the Observatory average. An Environment Agency flood alert is currently in place for North Cornwall coast from The Rumps to Hartland Point, flooding is possible.",
+        "paragraph": "1.4 mm of rain has been recorded today, with water depth ranging from 27.1 to 31.1 cm and the latest reading at 27.4 cm. Today\u2019s highest water depth so far is around 85% above the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
+        "speech": "River levels steady. 1.4 millimetres of rain has been recorded today, with water depth ranging from 27.1 to 31.1 centimetres and the latest reading at 27.4 centimetres. Today\u2019s highest water depth so far is around 85 percent above the Observatory average. There are currently no Environment Agency flood alerts or warnings for this location.",
         "stale": {
           "headline": "Insufficient readings",
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-27T10:49:04.221279+00:00"
+        "valid_until": "2026-10-27T11:04:03.783175+00:00"
       },
       {
         "headline": "River levels steady",
@@ -8152,25 +8152,20 @@
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
     "area_label": "North Cornwall coast from The Rumps to Hartland Point",
-    "checked_at": "2026-10-27T09:48:57.247599Z",
+    "checked_at": "2026-10-27T10:03:55.867504Z",
     "count": 1,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
-    "label": "Flood Alert in force",
-    "message": "Environment Agency Flood Alert currently active in Boscastle, Cornwall. Flooding is possible. Be prepared.",
-    "notices": [
-      {
-        "area_label": "North Cornwall coast from The Rumps to Hartland Point",
-        "severity_level": 3
-      }
-    ],
+    "label": "Warning no longer in force",
+    "message": "The previous Environment Agency flood warning or alert for Boscastle, Cornwall is no longer in force. No further flooding is currently expected in this area.",
+    "notices": [],
     "reference_url": "https://environment.data.gov.uk/flood-monitoring/doc/reference",
-    "severity": "Flood alert",
-    "severity_level": 3,
+    "severity": "Warning no longer in force",
+    "severity_level": 4,
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
-    "state": "flood_alert",
-    "updated_at": "2026-10-26T12:44:00"
+    "state": "warning_no_longer_in_force",
+    "updated_at": "2026-10-27T09:49:00"
   },
   "panels": {
     "depth": {
@@ -12410,7 +12405,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-27T09:49:04.221204Z",
+    "published_at": "2026-10-27T10:04:03.783099Z",
     "state": "Online"
   },
   "summary_metrics": [
