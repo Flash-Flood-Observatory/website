@@ -8125,7 +8125,7 @@
           "paragraph": "This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable.",
           "speech": "Insufficient readings. This summary is out of date. Refresh the page for the latest readings. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-10-27T11:18:56.530531+00:00"
+        "valid_until": "2026-10-27T11:33:58.804014+00:00"
       },
       {
         "headline": "River levels steady",
@@ -8160,7 +8160,7 @@
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
     "area_label": "North Cornwall coast from The Rumps to Hartland Point",
-    "checked_at": "2026-10-27T10:18:52.769370Z",
+    "checked_at": "2026-10-27T10:33:56.167653Z",
     "count": 1,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -12421,7 +12421,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-27T10:18:56.530455Z",
+    "published_at": "2026-10-27T10:33:58.803945Z",
     "state": "Online"
   },
   "summary_metrics": [
