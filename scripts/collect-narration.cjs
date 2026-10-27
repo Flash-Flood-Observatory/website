@@ -6,7 +6,7 @@ const crypto = require('node:crypto');
 const {JSDOM} = require('jsdom');
 const root = path.resolve(__dirname, '..');
 
-async function renderNarrationDocument(payload, variant = '') {
+async function renderNarrationDocument(payload, variant = '', beforeMain = () => {}) {
   const [html, css, app] = await Promise.all(['index.html', 'styles.css', 'app.js']
     .map(file => fs.readFile(path.join(root, 'public', variant, file), 'utf8')));
   const dom = new JSDOM(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, ''), {
@@ -33,6 +33,7 @@ async function renderNarrationDocument(payload, variant = '') {
   window.TextEncoder = TextEncoder;
   Object.defineProperty(window.crypto, 'subtle', {value: crypto.webcrypto.subtle});
   window.fetch = async () => ({ok: true, json: async () => payload});
+  beforeMain(window);
   window.eval(app.replace(/main\(\);\s*$/, ''));
   await window.main();
   if (!window.document.querySelector('.read-aloud-button')) {
@@ -71,10 +72,22 @@ async function collectNarration(payload, variant = '') {
     }
     // Include every tab and expiry fallback, regardless of the build clock.
     for (const period of payload.observatory_summary?.periods || []) {
-      for (const content of [period, period.stale]) {
+      window.document.getElementById(`today-tab-${period.id}`).click();
+      const retained = window.selectedSummaryContent();
+      for (const content of [period, period.stale, window.summaryDisplayCopy(period), period.stale && window.summaryDisplayCopy(period.stale), retained]) {
         if (!content?.speech) continue;
         const hash = crypto.createHash('sha256').update(window.readAloudAudioVersion + '\n' + content.speech).digest('hex');
         requests.set(hash, {hash, text: content.speech, version: window.readAloudAudioVersion});
+      }
+    }
+    const alert = payload.official_alert;
+    if (alert) {
+      // A long-lived tab needs a recording after the official check expires too.
+      const checked = Date.parse(alert.checked_at || payload.status.published_at);
+      for (const content of [alert, window.officialAlertContent(alert, checked + 3600001)]) {
+        const text = window.officialAlertSpeech(content);
+        const hash = crypto.createHash('sha256').update(window.readAloudAudioVersion + '\n' + text).digest('hex');
+        requests.set(hash, {hash, text, version: window.readAloudAudioVersion});
       }
     }
     return [...requests.values()];

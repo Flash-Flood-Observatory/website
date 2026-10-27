@@ -35,9 +35,9 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="styles.css?v=20261015a">
+    <link rel="stylesheet" href="styles.css?v=20261027a">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
-    <script src="app.js?v=20261015a" defer></script>
+    <script src="app.js?v=20261027a" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#observations">Skip to observations</a>
@@ -80,6 +80,7 @@
               Real-time monitoring of extreme floods.
             </p>
             <div class="lead-meta" id="heroMeta"></div>
+            <div class="feed-status" id="feedStatus" role="status" hidden></div>
           </div>
           <aside class="observatory-map" id="observatoryMap" aria-label="Observatory location">
             <svg viewBox="0 0 220 270" role="img" aria-labelledby="mapTitle">
@@ -94,6 +95,7 @@
       <section class="today-summary content-frame" id="observatorySummary" aria-labelledby="todayTitle" hidden>
         <div class="today-heading"><h2 id="todayTitle">Today at the Observatory</h2></div>
         <div class="today-tabs" id="todayTabs" role="tablist" aria-label="Summary period"></div>
+        <div class="today-updated" id="todayUpdated" role="status"></div>
         <div id="todayContent" class="today-content" role="tabpanel" tabindex="0" aria-labelledby="today-tab-today">
           <h3 id="todayHeadline"></h3>
           <p id="todayParagraph"></p>

@@ -214,6 +214,13 @@ Optional `observatory_summary`: `{title, timezone, periods}`. Each period has
 and scientific classifications belong to the producer, not the browser. Speech
 expands measurement units and percentages. The normal and stale text are both
 included in the audio manifest. Old payloads without this object hide the panel.
+The `stale` content retains the measured headline and observation narrative,
+prefixed with the publication date, and excludes any current EA warning claim.
+Expiry changes freshness and relative-date labels, not the recorded measurements.
+The renderer also retains observations from older publishers whose `stale` field
+contained only a refresh instruction, omitting their current-alert sentences.
+Partial rainfall totals use “Available readings recorded”, without the previous
+“rainfall total is incomplete” clause. No payload fields or numeric values change.
 
 `panels.rainfall.synthetic_zero` identifies the legacy empty-response chart series.
 It must never establish coverage or a zero-rain narrative. `official_alert.checked_at`

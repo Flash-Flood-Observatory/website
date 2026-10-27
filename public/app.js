@@ -1,5 +1,6 @@
 const payloadPath = "data/site_payload.json";
 const fallbackWindowOption = { id: "24h", label: "24 hours" };
+const payloadCacheKey = "ffo-public-payload-v1";
 
 const chartPalette = {
   river: "#77e8ff",
@@ -24,6 +25,97 @@ let depthChart;
 let responseChart;
 let historicalRangeChart;
 let displayTimeZone = "UTC";
+let refreshInProgress = false;
+let cleanupReadAloud = () => {};
+
+function validPublicPayload(payload) {
+  return Boolean(payload?.site && Array.isArray(payload?.panels?.depth?.points) &&
+    Array.isArray(payload?.summary_metrics) &&
+    Number.isFinite(Date.parse(payload?.status?.published_at)));
+}
+
+function cachedPublicPayload() {
+  try {
+    const payload = JSON.parse(localStorage.getItem(payloadCacheKey));
+    return validPublicPayload(payload) ? payload : null;
+  } catch (_) { return null; }
+}
+
+async function fetchPublicPayload() {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 15000);
+  try {
+    const response = await fetch(payloadPath, { cache: "no-store", signal: controller.signal });
+    if (!response.ok) throw new Error(`The public data feed returned ${response.status}.`);
+    const payload = await response.json();
+    if (!validPublicPayload(payload)) throw new Error("The public data feed is invalid.");
+    const previous = dashboardPayload || cachedPublicPayload();
+    if (previous && Date.parse(payload.status.published_at) < Date.parse(previous.status.published_at)) {
+      throw new Error("The public data feed returned an older update.");
+    }
+    return payload;
+  } finally { window.clearTimeout(timeout); }
+}
+
+function renderPublicPayload(payload) {
+  const initial = !dashboardPayload;
+  const focusedId = document.activeElement?.id;
+  cleanupReadAloud();
+  dashboardPayload = payload;
+  for (const id of ["readings", "observations", "analysis", "context", "observatoryPartners"]) {
+    document.getElementById(id).hidden = false;
+  }
+  const skip = document.querySelector(".skip-link");
+  skip.href = "#observations";
+  skip.textContent = "Skip to observations";
+  skip.onclick = () => document.getElementById("observations").focus();
+  timeWindowState = buildTimeWindowState(payload, payload.panels || {});
+  if (initial || !timeWindowState.options.some(option => option.id === selectedTimeWindowId)) {
+    selectedTimeWindowId = timeWindowState.defaultId;
+  }
+  applyHero(payload.site || {}, payload.status || {});
+  renderOfficialAlert(payload.official_alert || {});
+  renderSummaryMetrics(payload.summary_metrics || []);
+  renderObservatorySummary(payload.observatory_summary);
+  renderTimeWindowSwitcher(timeWindowState);
+  renderDashboardPanels();
+  renderAnalysisPanels();
+  renderNotes(payload.notes || []);
+  renderFooter(payload.footer || {});
+  cleanupReadAloud = setupReadAloud();
+  if (focusedId) document.getElementById(focusedId)?.focus({preventScroll: true});
+}
+
+function showFeedStatus(delayed) {
+  const status = document.getElementById("feedStatus");
+  status.hidden = !delayed;
+  status.textContent = delayed
+    ? `Showing the last available update from ${formatDate(dashboardPayload.status.published_at)}. We’ll keep checking automatically. You can also refresh the page.`
+    : "";
+}
+
+async function refreshPublicPayload() {
+  if (refreshInProgress) return;
+  refreshInProgress = true;
+  try {
+    const payload = await fetchPublicPayload();
+    if (!dashboardPayload || payload.status.published_at !== dashboardPayload.status.published_at) {
+      const previous = dashboardPayload;
+      try { renderPublicPayload(payload); }
+      catch (error) {
+        if (previous) renderPublicPayload(previous);
+        else dashboardPayload = undefined;
+        throw error;
+      }
+    }
+    // A failed or malformed fetch must never overwrite the last usable update.
+    try { localStorage.setItem(payloadCacheKey, JSON.stringify(dashboardPayload)); } catch (_) {}
+    showFeedStatus(false);
+  } catch (error) {
+    if (dashboardPayload) showFeedStatus(true);
+    else applyErrorState(error);
+  } finally { refreshInProgress = false; }
+}
 
 const darkChartPalette = {...chartPalette};
 function setupTheme() {
@@ -64,47 +156,54 @@ async function main() {
   mobileHeader.addEventListener('change', placeLocations);
   placeLocations();
   document.querySelector('.skip-link').onclick = () => document.getElementById('observations').focus();
-  try {
-    const response = await fetch(payloadPath, { cache: "no-store" });
-    if (!response.ok) {
-      throw new Error(`The public data feed returned ${response.status}.`);
-    }
-
-    dashboardPayload = await response.json();
-    timeWindowState = buildTimeWindowState(
-      dashboardPayload,
-      dashboardPayload.panels || {}
-    );
-    selectedTimeWindowId = timeWindowState.defaultId;
-
-    applyHero(dashboardPayload.site || {}, dashboardPayload.status || {});
-    renderOfficialAlert(dashboardPayload.official_alert || {});
-    renderSummaryMetrics(dashboardPayload.summary_metrics || []);
-    renderObservatorySummary(dashboardPayload.observatory_summary);
-    renderTimeWindowSwitcher(timeWindowState);
-    renderDashboardPanels();
-    renderAnalysisPanels();
-    renderNotes(dashboardPayload.notes || []);
-    renderFooter(dashboardPayload.footer || {});
-    setupReadAloud();
-    document.fonts?.ready.then(() => { renderDashboardPanels(); renderAnalysisPanels(); });
-    restoreAnchorAfterRender();
-  } catch (error) {
-    console.error(error);
-    applyErrorState(error);
+  // Show saved observations before waiting on a slow or unavailable connection.
+  const cached = cachedPublicPayload();
+  if (cached) {
+    try { renderPublicPayload(cached); showFeedStatus(true); }
+    catch (_) { dashboardPayload = undefined; }
   }
+  await refreshPublicPayload();
+  document.fonts?.ready.then(() => { if (dashboardPayload) { renderDashboardPanels(); renderAnalysisPanels(); } });
+  restoreAnchorAfterRender();
+  window.setInterval(() => { if (!document.hidden) refreshPublicPayload(); }, 60000);
+  window.setInterval(() => {
+    updateObservatorySummary();
+    if (dashboardPayload) renderOfficialAlert(dashboardPayload.official_alert || {});
+  }, 30000);
+  document.addEventListener("visibilitychange", () => {
+    updateObservatorySummary();
+    if (!document.hidden) refreshPublicPayload();
+  });
 }
 
 var selectedSummaryId = "today";
+function summaryDisplayCopy(content) {
+  // Retained payloads may predate the publisher's October wording changes.
+  const copy = value => (value || "")
+    .replaceAll(", but the rainfall total is incomplete", "")
+    .replace(/in place for .*?, (flooding is possible|flooding is expected|there is a danger to life)\./g,
+      "in place in Boscastle, Cornwall; $1.")
+    .replaceAll("flood alerts or warnings for this location.", "flood alerts or warnings in Boscastle, Cornwall.");
+  return {...content, paragraph: copy(content.paragraph), speech: copy(content.speech)};
+}
+
 function selectedSummaryContent(now = Date.now()) {
   const item = dashboardPayload?.observatory_summary?.periods?.find(period => period.id === selectedSummaryId);
   if (!item) return null;
-  return now >= Date.parse(item.valid_until) ? item.stale : item;
+  if (now < Date.parse(item.valid_until)) return summaryDisplayCopy(item);
+  if (item.stale && item.stale.headline !== "Insufficient readings") return summaryDisplayCopy(item.stale);
+  // Older publishers replaced expired observations with a refresh instruction.
+  // Retain their measurements too, excluding sentences claiming current alerts.
+  const withoutAlert = value => (value || "").split(/ (?:An Environment Agency |There are currently no Environment Agency |Current Environment Agency )/)[0];
+  return summaryDisplayCopy({...item, paragraph: withoutAlert(item.paragraph), speech: `Last available summary. ${withoutAlert(item.speech)}`});
 }
 function updateObservatorySummary() {
   const section = document.getElementById("observatorySummary");
   const content = selectedSummaryContent();
   if (!content) return;
+  const expired = Date.now() >= Date.parse(dashboardPayload.observatory_summary.periods.find(period => period.id === selectedSummaryId).valid_until);
+  const updated = document.getElementById("todayUpdated");
+  updated.textContent = `${expired ? "Last available summary" : "Updated"} · ${formatDate(dashboardPayload.status.published_at)}${expired ? " · Checking automatically for updates." : ""}`;
   const heading = document.getElementById("todayHeadline");
   const paragraph = document.getElementById("todayParagraph");
   if (heading.textContent !== content.headline || paragraph.textContent !== content.paragraph) {
@@ -117,12 +216,35 @@ function updateObservatorySummary() {
     const selected = tab.dataset.period === selectedSummaryId;
     tab.setAttribute("aria-selected", String(selected));
     tab.tabIndex = selected ? 0 : -1;
+    tab.textContent = summaryPeriodLabel(tab.dataset.period);
   });
+}
+
+function summaryPeriodLabel(id) {
+  const summary = dashboardPayload.observatory_summary;
+  const period = summary.periods.find(period => period.id === id);
+  const published = new Date(dashboardPayload.status.published_at);
+  const timezone = summary.timezone || displayTimeZone;
+  const date = value => {
+    const parts = new Intl.DateTimeFormat("en-GB", {timeZone: timezone, year:"numeric", month:"2-digit", day:"2-digit"}).formatToParts(value);
+    const part = name => parts.find(item => item.type === name).value;
+    return `${part("year")}-${part("month")}-${part("day")}`;
+  };
+  if (date(published) === date(new Date())) return period.label;
+  // Work with calendar dates, so yesterday stays yesterday across DST changes.
+  const day = new Date(`${date(published)}T12:00:00Z`);
+  const label = offset => {
+    const value = new Date(day);
+    value.setUTCDate(value.getUTCDate() + offset);
+    return new Intl.DateTimeFormat("en-GB", {timeZone:"UTC", day:"numeric", month:"short", year:"numeric"}).format(value);
+  };
+  return id === "today" ? label(0) : id === "yesterday" ? label(-1) : `${label(-5)}–${label(-1)}`;
 }
 function renderObservatorySummary(summary) {
   const section = document.getElementById("observatorySummary");
   if (!summary?.periods?.length) { section.hidden = true; return; }
   section.hidden = false;
+  if (!summary.periods.some(period => period.id === selectedSummaryId)) selectedSummaryId = summary.periods[0].id;
   document.getElementById("todayTitle").textContent = summary.title;
   const tabs = document.getElementById("todayTabs");
   tabs.replaceChildren();
@@ -149,9 +271,6 @@ function renderObservatorySummary(summary) {
     tabs.append(button);
   });
   updateObservatorySummary();
-  // Expire summaries in long-lived tabs too, including at UK midnight.
-  window.setInterval(updateObservatorySummary, 30000);
-  document.addEventListener("visibilitychange", updateObservatorySummary);
 }
 
 function restoreAnchorAfterRender() {
@@ -246,12 +365,25 @@ function renderMetaChip(item) {
   return wrapper;
 }
 
+function officialAlertContent(alert, now = Date.now()) {
+  const checked = Date.parse(alert.checked_at || dashboardPayload?.status?.published_at);
+  if (!Number.isFinite(checked) || now - checked <= 3600000) return alert;
+  return {...alert, state: "unavailable", label: "Latest official flood status unavailable",
+    message: `The last available Environment Agency update was checked ${formatDate(checked)}. Visit the official source for current flood alerts and warnings.`};
+}
+
+function officialAlertSpeech(alert) {
+  return [alert.eyebrow, alert.label, alert.message,
+    alert.updated_at ? `Updated on ${spokenTimestamp(alert.updated_at)}.` : "", `Official source: ${alert.source_name || "Environment Agency"}.`].filter(Boolean).join(" ");
+}
+
 function renderOfficialAlert(alert) {
   const banner = document.getElementById("officialAlert");
   if (!alert || (!alert.state && !alert.label)) {
     banner.hidden = true;
     return;
   }
+  alert = officialAlertContent(alert);
 
   const state =
     typeof alert.state === "string" ? alert.state : "unavailable";
@@ -290,6 +422,7 @@ function renderOfficialAlert(alert) {
 }
 
 function floodStatusSymbol(state) {
+  if (state === "warning_no_longer_in_force") state = "none";
   const known = ["none", "flood_alert", "flood_warning", "severe_flood_warning"].includes(state);
   if (!known) return '<svg viewBox="0 0 100 90" aria-hidden="true"><circle cx="50" cy="45" r="32" fill="none" stroke="currentColor" stroke-width="4"/><path d="M50 38v25M50 25v3" stroke="currentColor" stroke-width="5"/></svg>';
   const color = state === "none" ? "#36933d" : state === "flood_alert" ? "#dc800d" : "#ce202b";
@@ -1857,8 +1990,9 @@ function readAloudText(section) {
   if (section.id === "observatoryPartners") return "Observatory partners. University of Greenwich. University of Bath. Delft University of Technology, and funded by the Royal Society.";
   if (section.matches("#top .briefing__grid")) return introductionSpeech();
   if (section.id === "levelHeatmapPanel") return heatmapSpeech();
-  if (section.id === "officialAlert") return [dashboardPayload.official_alert.eyebrow, dashboardPayload.official_alert.label, dashboardPayload.official_alert.message,
-    dashboardPayload.official_alert.updated_at ? `Updated on ${spokenTimestamp(dashboardPayload.official_alert.updated_at)}.` : "", `Official source: ${dashboardPayload.official_alert.source_name || "Environment Agency"}.`].filter(Boolean).join(" ");
+  if (section.id === "officialAlert") {
+    return officialAlertSpeech(officialAlertContent(dashboardPayload.official_alert));
+  }
   const parts = [];
   function visit(node) {
     if (node.nodeType === Node.TEXT_NODE) {
@@ -2003,6 +2137,15 @@ function setupReadAloud() {
   document.getElementById("heatmapPeriodSelect")?.addEventListener("change", stop);
   document.getElementById("observatorySummary")?.addEventListener("summarychange", stop);
   window.addEventListener("pagehide", stop);
+  return () => {
+    stop();
+    document.querySelector(".window-switcher")?.removeEventListener("click", stop);
+    document.getElementById("heatmapPeriodSelect")?.removeEventListener("change", stop);
+    document.getElementById("observatorySummary")?.removeEventListener("summarychange", stop);
+    window.removeEventListener("pagehide", stop);
+    document.querySelectorAll(".read-aloud-button").forEach(button => button.remove());
+    player.remove();
+  };
 }
 
 

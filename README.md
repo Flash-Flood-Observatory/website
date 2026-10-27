@@ -47,12 +47,20 @@ Headlines reflect maximum minus minimum depth within each day (the largest daily
 range for the five-day tab), never a first-to-last trend or flood-warning status.
 Paragraphs use the same cleaned source measurements as the charts, and comparisons
 use the full-precision Observatory mean behind the heatmap. Missing rainfall is not
-zero: partial totals and depth coverage are stated explicitly. Positive rainfall
-recorded today uses the approved simpler wording “X mm of rain has been recorded
-today”, while retaining the underlying coverage checks.
+zero: partial rainfall totals say “Available readings recorded X mm”, while depth
+coverage is stated explicitly. The summary omits the rainfall “incomplete” caveat
+without turning missing readings into confirmed zero rainfall. Official alert
+sentences refer to Boscastle, Cornwall, matching the official EA panel.
 
 The renderer displays the supplied headline and paragraph, with keyboard-operable
 tabs and one read-aloud control. Changing tabs stops playback. Audio builds include
-every tab and expiry fallback. Current summaries expire within an hour, and all
-relative-day summaries expire at UK midnight. The weather symbol is omitted unless
+every tab and expiry fallback. Expiry retains a dated observation snapshot and
+removes current official-warning claims. After UK midnight, tabs show their actual
+dates. The summary fills the dashboard content width and uses a serif heading.
+The browser saves the last successfully rendered public payload and checks for
+updates every minute while the page is visible. Fetch failures retain that update
+with its timestamp; unavailable browser storage does not prevent online loading.
+An official EA check older than one hour is shown as unavailable with its source
+link. Cleared warnings use the same green symbol as no active warnings.
+The weather symbol is omitted unless
 retrieval and reuse can be verified. Expandable chart-value tables are not shown.

@@ -16,7 +16,9 @@ A successful rainfall query with no readings represents a zero-rain window. A fa
 
 Each of the four charts has a keyboard-operable “View chart data” disclosure. Tables use the same public, window-filtered series as the charts; event-analysis rainfall and flow retain their separate timestamps and units. Historical readings retain their full published range. Table rows are built only when expanded and are excluded from the established narration. No payload schema or scientific calculation changes are required.
 
-On narrow screens the observatory-location row scrolls away, while the identity and section navigation remain sticky. Below 360px the summary metrics use full-width rows. Failed feed loads show a plain-language message and a Retry button that reloads the page. The existing light/dark toggle is unchanged.
+On narrow screens the observatory-location row scrolls away, while the identity and section navigation remain sticky. Below 360px the summary metrics use full-width rows. The narrative spans the content width with serif headings.
+
+The browser caches the last successfully rendered public payload and displays it immediately on the next visit while checking for a newer update. It checks for updates every minute while visible and when returning to the page, with a 15-second request timeout. A failed, malformed or older response retains the last usable update and shows its timestamp. Without a previous update, the loading error includes a Retry button; automatic checks continue. Successful updates retain chart and summary selections and replace audio controls without duplicating listeners. Storage errors are non-fatal. Expired summaries retain dated observations, and relative-day tabs become calendar dates after local midnight. Official status checks expire after one hour and retain the EA source link for current information.
 
 The appearance initially follows the system setting. The light/dark button remembers a manual choice. Theme changes retain chart selections.
 

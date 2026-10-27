@@ -1628,17 +1628,19 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
   .summary-card .summary-note { grid-column: 1 / -1; }
 }
 
-/* A compact narrative band using the existing dashboard's type and accents. */
+/* The narrative fills the dashboard width, with a distinct editorial typeface. */
 .today-summary { padding-block: 1rem 1.5rem; }
 .today-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.today-heading h2 { margin: 0; font-size: 1.1rem; }
+.today-heading h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.5rem, 2.3vw, 2rem); font-weight: 700; }
 .today-heading .read-aloud-button { position: static; display: inline-flex; align-items: center; gap: .4rem; width: auto; min-height: 44px; padding: .35rem 0 .35rem .5rem; font-size: .8rem; white-space: nowrap; }
-.today-tabs { display: flex; gap: 1.25rem; border-bottom: 1px solid var(--line); margin-top: .4rem; }
-.today-tabs button { background: none; color: var(--muted); border: 0; border-bottom: 2px solid transparent; border-radius: 0; min-height: 44px; padding: .6rem 0; font: inherit; font-size: .85rem; cursor: pointer; }
+.today-tabs { display: flex; gap: 1.25rem; border-bottom: 1px solid var(--line); margin-top: .4rem; overflow-x: auto; }
+.today-tabs button { flex: 0 0 auto; white-space: nowrap; background: none; color: var(--muted); border: 0; border-bottom: 2px solid transparent; border-radius: 0; min-height: 44px; padding: .6rem 0; font: inherit; font-size: .85rem; cursor: pointer; }
 .today-tabs button[aria-selected="true"] { color: var(--cyan); border-bottom-color: currentColor; font-weight: 600; }
 .today-content { padding-top: .85rem; }
-.today-content h3 { margin: 0 0 .35rem; color: var(--ink); font-size: 1.05rem; }
-.today-content p { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.6; max-width: 105ch; }
+.today-content h3 { margin: 0 0 .45rem; color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 1.3rem; }
+.today-content p { margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.7; max-width: none; }
+.today-updated { margin-top: .65rem; color: var(--muted); font-size: .8rem; }
+.feed-status { margin-top: .75rem; color: var(--muted); font-size: .9rem; line-height: 1.5; }
 @media (max-width: 39.999rem) {
   .today-heading { flex-wrap: wrap; gap: 0 .75rem; }
   .today-tabs { gap: 1rem; }
