@@ -231,6 +231,7 @@ select {
 .briefing__lede {
   max-width: 67ch;
   margin: 0;
+  text-align: justify;
   color: var(--ink-soft);
   font-size: var(--text-body);
   line-height: 1.6;
