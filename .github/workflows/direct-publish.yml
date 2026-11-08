@@ -1,0 +1,80 @@
+name: Direct static publishing
+
+on:
+  workflow_dispatch:
+    inputs:
+      component:
+        description: Staged component to publish
+        type: choice
+        options: [site, audio]
+        default: site
+  push:
+    branches: [main]
+    paths: ['public/**', '!public/data/**', 'scripts/**', 'package*.json', '.github/workflows/direct-publish.yml']
+  schedule:
+    - cron: '*/15 * * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: direct-${{ github.event_name == 'schedule' && 'audio' || inputs.component || 'site' }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: vars.DIRECT_PUBLISH_ENABLED == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment: direct-publishing
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Select component
+        env:
+          EVENT: ${{ github.event_name }}
+          COMPONENT: ${{ inputs.component }}
+        run: |
+          if [ "$EVENT" = schedule ] || [ "$COMPONENT" = audio ]; then
+            echo 'COMPONENT=audio' >> "$GITHUB_ENV"
+          else
+            echo 'COMPONENT=site' >> "$GITHUB_ENV"
+          fi
+      - run: npm ci --ignore-scripts && npm test
+      - uses: actions/cache@v4
+        if: env.COMPONENT == 'audio'
+        with:
+          path: .cache/voice
+          key: cori-alba-medium-c10ece1aade47bb51c153c893d14e5bf8e5b7117
+      - uses: actions/cache@v4
+        if: env.COMPONENT == 'audio'
+        with:
+          path: .cache/clips
+          key: direct-narration-${{ github.run_id }}
+          restore-keys: direct-narration-
+      - name: Build current narration independently
+        if: env.COMPONENT == 'audio'
+        timeout-minutes: 6
+        run: |
+          curl --fail --silent --show-error --max-time 30 https://flashfloodobservatory.com/data/site_payload.json -o public/data/site_payload.json
+          python -m pip install -r scripts/requirements-audio.txt
+          npm run audio:build
+      - name: Package only the selected public component
+        run: python scripts/package-direct.py "$COMPONENT" /tmp/public-component.tar
+      - name: Upload to restricted staging or active publisher
+        env:
+          PUBLISH_HOST: ${{ secrets.PUBLIC_PUBLISH_HOST }}
+          PUBLISH_KEY: ${{ secrets.PUBLIC_PUBLISH_KEY_B64 }}
+          PUBLISH_KNOWN_HOSTS: ${{ secrets.PUBLIC_PUBLISH_KNOWN_HOSTS_B64 }}
+        run: |
+          umask 077
+          trap 'rm -f /tmp/publish-key /tmp/publish-hosts' EXIT
+          printf '%s' "$PUBLISH_KEY" | base64 --decode > /tmp/publish-key
+          printf '%s' "$PUBLISH_KNOWN_HOSTS" | base64 --decode > /tmp/publish-hosts
+          timeout 110 ssh -T -o BatchMode=yes -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes -o UserKnownHostsFile=/tmp/publish-hosts -o ConnectTimeout=10 -o ServerAliveInterval=10 -o ServerAliveCountMax=2 -i /tmp/publish-key "$PUBLISH_HOST" "$COMPONENT" < /tmp/public-component.tar > /tmp/publish-receipt.json
+          python -c 'import json; r=json.load(open("/tmp/publish-receipt.json")); assert r.get("published"); print(r)'
