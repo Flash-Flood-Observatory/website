@@ -64,3 +64,20 @@ An official EA check older than one hour is shown as unavailable with its source
 link. Cleared warnings use the same green symbol as no active warnings.
 The weather symbol is omitted unless
 retrieval and reuse can be verified. Expandable chart-value tables are not shown.
+
+### Independent static publishing (opt-in)
+
+`direct-publish.yml` separates site-code uploads from narration uploads. It never
+packages `public/data/`: the curated readings are delivered independently by the
+configured data publisher. The workflow is manual until `DIRECT_PUBLISH_ENABLED`
+is set to `true`; the existing Pages workflow remains the rollback path during
+staging. Configure the `direct-publishing` environment's `PUBLIC_PUBLISH_HOST`,
+`PUBLIC_PUBLISH_KEY_B64` and `PUBLIC_PUBLISH_KNOWN_HOSTS_B64` secrets using a dedicated,
+restricted build identity and a host key verified out of band.
+
+Site-code pushes build only code/assets; the scheduled job builds narration from
+the current public payload. Only current clips are uploaded. The receiver retains
+older generated clips for 48 hours so an already-open page can still play them.
+Never enable two public deployment authorities during cutover: the operator must
+verify staging, routing, HTTPS and rollback before disabling Pages activation and
+enabling direct publication. Operational deployment details remain private.

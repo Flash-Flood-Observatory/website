@@ -7,6 +7,7 @@ import hashlib
 import io
 import json
 import re
+import shutil
 from audio_retention import publish_clips
 import urllib.request
 import wave
