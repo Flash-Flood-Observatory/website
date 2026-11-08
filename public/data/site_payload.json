@@ -8454,10 +8454,10 @@
         "speech": "River levels steady. 0.2 millimetres of rain has been recorded today, with water depth ranging from 5.5 to 10.6 centimetres and the latest reading at 9.1 centimetres. Today\u2019s highest water depth so far is around 37 percent below the Observatory average. There are currently no Environment Agency flood alerts or warnings in Boscastle, Cornwall.",
         "stale": {
           "headline": "River levels steady",
-          "paragraph": "Last available summary, published on 8 November 2026 at 11:48 GMT. 0.2 mm of rain has been recorded today, with water depth ranging from 5.5 to 10.6 cm and the latest reading at 9.1 cm. Today\u2019s highest water depth so far is around 37% below the Observatory average. Current Environment Agency flood alert and warning information is unavailable.",
-          "speech": "River levels steady. Last available summary, published on 8th of November 2026 at 11:48 GMT. 0.2 millimetres of rain has been recorded today, with water depth ranging from 5.5 to 10.6 centimetres and the latest reading at 9.1 centimetres. Today\u2019s highest water depth so far is around 37 percent below the Observatory average. Current Environment Agency flood alert and warning information is unavailable."
+          "paragraph": "Last available summary, published on 8 November 2026 at 12:03 GMT. 0.2 mm of rain has been recorded today, with water depth ranging from 5.5 to 10.6 cm and the latest reading at 9.1 cm. Today\u2019s highest water depth so far is around 37% below the Observatory average. Current Environment Agency flood alert and warning information is unavailable.",
+          "speech": "River levels steady. Last available summary, published on 8th of November 2026 at 12:03 GMT. 0.2 millimetres of rain has been recorded today, with water depth ranging from 5.5 to 10.6 centimetres and the latest reading at 9.1 centimetres. Today\u2019s highest water depth so far is around 37 percent below the Observatory average. Current Environment Agency flood alert and warning information is unavailable."
         },
-        "valid_until": "2026-11-08T12:48:56.731870+00:00"
+        "valid_until": "2026-11-08T13:03:52.923596+00:00"
       },
       {
         "headline": "River levels steady",
@@ -8467,8 +8467,8 @@
         "speech": "River levels steady. 7.8 millimetres of rain was recorded yesterday, with water depth ranging from 7 to 13.6 centimetres. Yesterday\u2019s highest water depth was around 19 percent below the Observatory average.",
         "stale": {
           "headline": "River levels steady",
-          "paragraph": "Last available summary, published on 8 November 2026 at 11:48 GMT. 7.8 mm of rain was recorded yesterday, with water depth ranging from 7 to 13.6 cm. Yesterday\u2019s highest water depth was around 19% below the Observatory average.",
-          "speech": "River levels steady. Last available summary, published on 8th of November 2026 at 11:48 GMT. 7.8 millimetres of rain was recorded yesterday, with water depth ranging from 7 to 13.6 centimetres. Yesterday\u2019s highest water depth was around 19 percent below the Observatory average."
+          "paragraph": "Last available summary, published on 8 November 2026 at 12:03 GMT. 7.8 mm of rain was recorded yesterday, with water depth ranging from 7 to 13.6 cm. Yesterday\u2019s highest water depth was around 19% below the Observatory average.",
+          "speech": "River levels steady. Last available summary, published on 8th of November 2026 at 12:03 GMT. 7.8 millimetres of rain was recorded yesterday, with water depth ranging from 7 to 13.6 centimetres. Yesterday\u2019s highest water depth was around 19 percent below the Observatory average."
         },
         "valid_until": "2026-11-09T00:00:00+00:00"
       },
@@ -8480,8 +8480,8 @@
         "speech": "River levels steady. 7.8 millimetres of rain was recorded over the last five complete days, with water depth ranging from 6.8 to 18.3 centimetres. The maximum depth over the five days was recorded on 3rd of November 2026 and was around 9 percent above the Observatory average.",
         "stale": {
           "headline": "River levels steady",
-          "paragraph": "Last available summary, published on 8 November 2026 at 11:48 GMT. 7.8 mm of rain was recorded over the last five complete days, with water depth ranging from 6.8 to 18.3 cm. The maximum depth over the five days was recorded on 3 November 2026 and was around 9% above the Observatory average.",
-          "speech": "River levels steady. Last available summary, published on 8th of November 2026 at 11:48 GMT. 7.8 millimetres of rain was recorded over the last five complete days, with water depth ranging from 6.8 to 18.3 centimetres. The maximum depth over the five days was recorded on 3rd of November 2026 and was around 9 percent above the Observatory average."
+          "paragraph": "Last available summary, published on 8 November 2026 at 12:03 GMT. 7.8 mm of rain was recorded over the last five complete days, with water depth ranging from 6.8 to 18.3 cm. The maximum depth over the five days was recorded on 3 November 2026 and was around 9% above the Observatory average.",
+          "speech": "River levels steady. Last available summary, published on 8th of November 2026 at 12:03 GMT. 7.8 millimetres of rain was recorded over the last five complete days, with water depth ranging from 6.8 to 18.3 centimetres. The maximum depth over the five days was recorded on 3rd of November 2026 and was around 9 percent above the Observatory average."
         },
         "valid_until": "2026-11-09T00:00:00+00:00"
       }
@@ -8491,7 +8491,7 @@
   },
   "official_alert": {
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
-    "checked_at": "2026-11-08T11:48:51.357381Z",
+    "checked_at": "2026-11-08T12:03:51.967033Z",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
@@ -8504,7 +8504,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-11-08T11:48:56.390738Z"
+    "updated_at": "2026-11-08T12:03:52.567604Z"
   },
   "panels": {
     "depth": {
@@ -10642,7 +10642,7 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-11-08T11:15:00Z",
+      "last_updated": "2026-11-08T11:30:00Z",
       "points": [
         {
           "timestamp": "2026-11-03T00:00:00Z",
@@ -12747,6 +12747,10 @@
         {
           "timestamp": "2026-11-08T11:15:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-11-08T11:30:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -12784,7 +12788,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-11-08T11:48:56.731793Z",
+    "published_at": "2026-11-08T12:03:52.923502Z",
     "state": "Online"
   },
   "summary_metrics": [
